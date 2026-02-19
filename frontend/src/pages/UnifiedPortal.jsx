@@ -1,0 +1,1437 @@
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+// Icons as SVG components
+const Icons = {
+    Dashboard: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+        </svg>
+    ),
+    Users: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+    ),
+    Service: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+    ),
+    Activity: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+    ),
+    Settings: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m-6 0l-4.2 4.2" />
+        </svg>
+    ),
+    Calendar: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+    ),
+    Support: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+    ),
+    Analytics: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="12" y1="20" x2="12" y2="10" />
+            <line x1="18" y1="20" x2="18" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="16" />
+        </svg>
+    ),
+    Check: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+    ),
+    Plus: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+    ),
+    Edit: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+    ),
+    Trash: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        </svg>
+    ),
+    ArrowRight: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+        </svg>
+    ),
+    ArrowLeft: () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+        </svg>
+    ),
+    Bell: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+    ),
+    Mail: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+        </svg>
+    ),
+    Phone: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+    ),
+    File: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+            <polyline points="13 2 13 9 20 9" />
+        </svg>
+    ),
+}
+
+const ADMIN_ID = 'Admin001'
+const ADMIN_PW = 'Arcanxt1'
+
+const SERVICES = [
+    { id: 'lead-capture', name: 'Lead Capture Automation', icon: 'target', desc: 'Automatically capture leads from all sources', color: '#3B82F6' },
+    { id: 'ai-followup', name: 'AI Follow-Up Systems', icon: 'zap', desc: 'Intelligent multi-channel automation', color: '#8B5CF6' },
+    { id: 'crm', name: 'CRM Automation', icon: 'settings', desc: 'Seamless CRM integration & workflows', color: '#10B981' },
+    { id: 'dashboards', name: 'Reporting Dashboards', icon: 'chart', desc: 'Real-time KPI tracking & analytics', color: '#F59E0B' },
+    { id: 'integrations', name: 'Custom Integrations', icon: 'link', desc: 'Connect any tool or API', color: '#EF4444' },
+]
+
+const ServiceIcon = ({ type, color }) => {
+    const iconMap = {
+        target: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+        zap: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+        settings: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m-6 0l-4.2 4.2"/></svg>,
+        chart: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>,
+        link: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>,
+    }
+    return iconMap[type] || iconMap.target
+}
+
+const SERVICE_QUESTIONS = {
+    'lead-capture': [
+        { key: 'sources', label: 'Lead Sources', type: 'multi', options: ['Website Forms', 'Facebook Ads', 'Google Ads', 'LinkedIn', 'Referrals', 'Other'] },
+        { key: 'volume', label: 'Monthly Lead Volume', type: 'select', options: ['0-100', '100-500', '500-1000', '1000+'] },
+        { key: 'crm', label: 'Current CRM', type: 'select', options: ['HubSpot', 'Salesforce', 'GoHighLevel', 'Pipedrive', 'None'] },
+    ],
+    'ai-followup': [
+        { key: 'channels', label: 'Communication Channels', type: 'multi', options: ['Email', 'SMS', 'WhatsApp', 'Phone Calls'] },
+        { key: 'frequency', label: 'Follow-up Frequency', type: 'select', options: ['Daily', 'Every 2 days', 'Weekly', 'Custom'] },
+        { key: 'tone', label: 'Communication Tone', type: 'select', options: ['Professional', 'Friendly', 'Casual', 'Formal'] },
+    ],
+    'crm': [
+        { key: 'platform', label: 'CRM Platform', type: 'select', options: ['HubSpot', 'Salesforce', 'GoHighLevel', 'Pipedrive', 'Other'] },
+        { key: 'users', label: 'Number of Users', type: 'select', options: ['1-5', '6-20', '21-50', '50+'] },
+        { key: 'workflows', label: 'Automation Needs', type: 'multi', options: ['Lead Assignment', 'Deal Stages', 'Task Creation', 'Email Sequences'] },
+    ],
+    'dashboards': [
+        { key: 'metrics', label: 'Key Metrics', type: 'multi', options: ['Lead Volume', 'Conversion Rate', 'Revenue', 'ROI', 'Team Performance'] },
+        { key: 'frequency', label: 'Update Frequency', type: 'select', options: ['Real-time', 'Hourly', 'Daily', 'Weekly'] },
+        { key: 'users', label: 'Dashboard Users', type: 'select', options: ['1-5', '6-20', '21-50', '50+'] },
+    ],
+    'integrations': [
+        { key: 'tools', label: 'Tools to Integrate', type: 'multi', options: ['Stripe', 'Zapier', 'Calendly', 'Slack', 'Custom API'] },
+        { key: 'complexity', label: 'Integration Complexity', type: 'select', options: ['Simple', 'Moderate', 'Complex', 'Enterprise'] },
+        { key: 'timeline', label: 'Desired Timeline', type: 'select', options: ['1-2 weeks', '2-4 weeks', '1-2 months', 'Flexible'] },
+    ],
+}
+
+function getUsers() {
+    try { return JSON.parse(localStorage.getItem('arcanext_users') || '[]') } catch { return [] }
+}
+function saveUsers(u) { localStorage.setItem('arcanext_users', JSON.stringify(u)) }
+function generateId() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let result = ''
+    for (let i = 0; i < 8; i++) result += chars.charAt(Math.floor(Math.random() * chars.length))
+    return result
+}
+
+function authenticateUser(username, password) {
+    if (username === ADMIN_ID && password === ADMIN_PW) {
+        return { id: 'admin', name: 'Administrator', username: ADMIN_ID, role: 'admin', active: true }
+    }
+    const users = getUsers()
+    return users.find(u => u.username === username && u.password === password && u.active)
+}
+
+function logActivity(userId, action, details = '') {
+    const activities = JSON.parse(localStorage.getItem('arcanext_activities') || '[]')
+    activities.push({
+        id: Date.now(),
+        userId,
+        action,
+        details,
+        timestamp: new Date().toISOString(),
+    })
+    localStorage.setItem('arcanext_activities', JSON.stringify(activities.slice(-100)))
+}
+
+/* ===== LOGIN ===== */
+function LoginScreen({ onLogin }) {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [err, setErr] = useState('')
+
+    const handleLogin = () => {
+        const user = authenticateUser(username, password)
+        if (user) {
+            logActivity(user.id, 'login', `User logged in`)
+            onLogin(user)
+        } else {
+            setErr('Invalid credentials or account disabled.')
+        }
+    }
+
+    return (
+        <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gradient-hero)', padding: '100px 24px 40px', position: 'relative', overflow: 'hidden' }}>
+            {/* Decorative Elements */}
+            <div style={{ position: 'absolute', top: '10%', right: '10%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%)', filter: 'blur(60px)' }} />
+            <div style={{ position: 'absolute', bottom: '10%', left: '10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%)', filter: 'blur(60px)' }} />
+            
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ background: 'white', borderRadius: 'var(--radius-xl)', padding: '56px', width: '100%', maxWidth: 460, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', position: 'relative', zIndex: 1 }}>
+                <div style={{ textAlign: 'center', marginBottom: 40 }}>
+                    <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.5, type: 'spring' }} style={{ width: 64, height: 64, borderRadius: 'var(--radius-md)', background: 'var(--gradient-card)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '1.8rem', fontFamily: 'Poppins', marginBottom: 20, boxShadow: '0 10px 25px rgba(30, 58, 138, 0.3)' }}>A</motion.div>
+                    <h2 style={{ fontSize: '1.75rem', marginBottom: 10, fontFamily: 'Poppins', fontWeight: 700 }}>Welcome Back</h2>
+                    <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem' }}>Sign in to access your Arcanext portal</p>
+                </div>
+                
+                {err && (
+                    <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} style={{ background: '#FEE2E2', color: '#DC2626', padding: '12px 18px', borderRadius: 'var(--radius-md)', marginBottom: 24, fontSize: '0.9rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span>⚠️</span>
+                        <span>{err}</span>
+                    </motion.div>
+                )}
+                
+                <div className="form-group" style={{ marginBottom: 24 }}>
+                    <label className="form-label" style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: 10 }}>Username</label>
+                    <input className="form-input" placeholder="Enter your username" value={username} onChange={e => { setUsername(e.target.value); setErr('') }} style={{ padding: '14px 18px', fontSize: '0.95rem' }} />
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: 32 }}>
+                    <label className="form-label" style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: 10 }}>Password</label>
+                    <input className="form-input" type="password" placeholder="Enter your password" value={password} onChange={e => { setPassword(e.target.value); setErr('') }} onKeyDown={e => e.key === 'Enter' && handleLogin()} style={{ padding: '14px 18px', fontSize: '0.95rem' }} />
+                </div>
+                
+                <button onClick={handleLogin} className="btn btn-primary btn-lg" style={{ width: '100%', padding: '16px', fontSize: '1rem', fontWeight: 600 }}>
+                    Sign In →
+                </button>
+                
+                <div style={{ marginTop: 28, padding: '20px', background: 'var(--gray-50)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginBottom: 8 }}>Admin Access</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--gray-700)' }}>
+                        <code style={{ background: 'white', padding: '4px 10px', borderRadius: 4, fontWeight: 600, marginRight: 8 }}>Admin001</code>
+                        <span style={{ color: 'var(--gray-400)' }}>/</span>
+                        <code style={{ background: 'white', padding: '4px 10px', borderRadius: 4, fontWeight: 600, marginLeft: 8 }}>Arcanxt1</code>
+                    </p>
+                </div>
+            </motion.div>
+        </div>
+    )
+}
+
+/* ===== SIDEBAR ===== */
+function Sidebar({ currentView, setView, user, onLogout }) {
+    const clientItems = [
+        { key: 'welcome', label: 'Dashboard', icon: Icons.Dashboard },
+        { key: 'my-service', label: 'My Service', icon: Icons.Service },
+        { key: 'calendar', label: 'Calendar', icon: Icons.Calendar },
+        { key: 'analytics', label: 'Analytics', icon: Icons.Analytics },
+        { key: 'support', label: 'Support', icon: Icons.Support },
+    ]
+    const adminItems = [
+        { key: 'overview', label: 'Overview', icon: Icons.Dashboard },
+        { key: 'users', label: 'User Management', icon: Icons.Users },
+        { key: 'services', label: 'All Services', icon: Icons.Service },
+        { key: 'calendar', label: 'Calendar', icon: Icons.Calendar },
+        { key: 'activity', label: 'Activity Log', icon: Icons.Activity },
+        { key: 'settings', label: 'Settings', icon: Icons.Settings },
+    ]
+    const items = user.role === 'admin' ? adminItems : clientItems
+
+    return (
+        <div style={{ width: 280, minHeight: 'calc(100vh - 80px)', background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)', padding: '40px 0', position: 'sticky', top: 80, flexShrink: 0, borderRight: '1px solid rgba(255,255,255,0.05)' }} className="portal-sidebar">
+            <div style={{ padding: '0 28px', marginBottom: 40 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+                    <div style={{ width: 40, height: 40, borderRadius: 'var(--radius-md)', background: 'var(--gradient-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '1.1rem', boxShadow: '0 4px 12px rgba(37,99,235,0.3)' }}>A</div>
+                    <span style={{ color: 'white', fontWeight: 700, fontFamily: 'Poppins', fontSize: '1.1rem' }}>Arcanext</span>
+                </div>
+                <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>Welcome back,</div>
+                <div style={{ fontSize: '0.95rem', color: 'white', fontWeight: 600 }}>{user.name}</div>
+                {user.role === 'admin' && (
+                    <div style={{ fontSize: '0.7rem', color: '#FCA5A5', background: 'rgba(239,68,68,0.15)', padding: '5px 12px', borderRadius: 'var(--radius-full)', display: 'inline-block', marginTop: 12, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', border: '1px solid rgba(239,68,68,0.2)' }}>
+                        Administrator
+                    </div>
+                )}
+            </div>
+            
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: '0 16px' }}>
+                {items.map(item => (
+                    <button key={item.key} onClick={() => setView(item.key)} style={{
+                        display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', border: 'none',
+                        background: currentView === item.key ? 'rgba(37,99,235,0.15)' : 'transparent',
+                        borderRadius: 'var(--radius-md)',
+                        cursor: 'pointer', width: '100%', textAlign: 'left', transition: 'all 0.2s ease',
+                        color: currentView === item.key ? 'white' : 'rgba(255,255,255,0.6)', fontFamily: 'Inter',
+                        fontSize: '0.9rem', fontWeight: currentView === item.key ? 600 : 500,
+                        position: 'relative',
+                    }}>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>{item.icon && <item.icon />}</span>
+                        <span>{item.label}</span>
+                        {currentView === item.key && (
+                            <div style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', width: 3, height: '60%', background: 'var(--primary-light)', borderRadius: '0 4px 4px 0' }} />
+                        )}
+                    </button>
+                ))}
+            </nav>
+            
+            <div style={{ position: 'absolute', bottom: 32, left: 0, right: 0, padding: '0 28px' }}>
+                <button onClick={onLogout} style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontFamily: 'Inter', fontSize: '0.9rem', fontWeight: 500, transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    <Icons.ArrowLeft />
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </div>
+    )
+}
+
+/* ===== CALENDAR COMPONENT ===== */
+function Calendar({ user }) {
+    const [currentDate, setCurrentDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [events, setEvents] = useState([
+        { id: 1, title: 'Team Meeting', date: new Date(), time: '10:00 AM', type: 'meeting' },
+        { id: 2, title: 'Client Call', date: new Date(Date.now() + 86400000), time: '2:00 PM', type: 'call' },
+        { id: 3, title: 'Project Review', date: new Date(Date.now() + 172800000), time: '11:00 AM', type: 'review' },
+    ])
+    const [showAddEvent, setShowAddEvent] = useState(false)
+
+    const getDaysInMonth = (date) => {
+        const year = date.getFullYear()
+        const month = date.getMonth()
+        const firstDay = new Date(year, month, 1)
+        const lastDay = new Date(year, month + 1, 0)
+        const daysInMonth = lastDay.getDate()
+        const startingDayOfWeek = firstDay.getDay()
+        
+        return { daysInMonth, startingDayOfWeek }
+    }
+
+    const { daysInMonth, startingDayOfWeek } = getDaysInMonth(currentDate)
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+    const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
+    const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))
+
+    const getEventsForDate = (day) => {
+        const dateToCheck = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+        return events.filter(event => 
+            event.date.toDateString() === dateToCheck.toDateString()
+        )
+    }
+
+    const isToday = (day) => {
+        const today = new Date()
+        return day === today.getDate() && 
+               currentDate.getMonth() === today.getMonth() && 
+               currentDate.getFullYear() === today.getFullYear()
+    }
+
+    return (
+        <div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 style={{ fontSize: '2.2rem', marginBottom: 10, fontFamily: 'Poppins' }}>Calendar</h1>
+                <p style={{ color: 'var(--gray-500)', marginBottom: 48, fontSize: '1.05rem' }}>Manage your schedule and appointments</p>
+            </motion.div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 32 }}>
+                {/* Calendar */}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                    <div className="card" style={{ padding: 32 }}>
+                        {/* Calendar Header */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+                            <h2 style={{ fontSize: '1.5rem', fontFamily: 'Poppins' }}>
+                                {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                            </h2>
+                            <div style={{ display: 'flex', gap: 12 }}>
+                                <button onClick={prevMonth} className="btn btn-secondary btn-sm" style={{ padding: '8px 16px' }}>
+                                    <Icons.ArrowLeft />
+                                </button>
+                                <button onClick={nextMonth} className="btn btn-secondary btn-sm" style={{ padding: '8px 16px' }}>
+                                    <Icons.ArrowRight />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Day Names */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 8, marginBottom: 8 }}>
+                            {dayNames.map(day => (
+                                <div key={day} style={{ textAlign: 'center', fontSize: '0.85rem', fontWeight: 600, color: 'var(--gray-500)', padding: '8px 0' }}>
+                                    {day}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Calendar Grid */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 8 }}>
+                            {[...Array(startingDayOfWeek)].map((_, i) => (
+                                <div key={`empty-${i}`} style={{ aspectRatio: '1', padding: 8 }} />
+                            ))}
+                            {[...Array(daysInMonth)].map((_, i) => {
+                                const day = i + 1
+                                const dayEvents = getEventsForDate(day)
+                                const today = isToday(day)
+                                
+                                return (
+                                    <div
+                                        key={day}
+                                        onClick={() => setSelectedDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))}
+                                        style={{
+                                            aspectRatio: '1',
+                                            padding: 8,
+                                            borderRadius: 'var(--radius-md)',
+                                            border: today ? '2px solid var(--primary)' : '1px solid var(--gray-200)',
+                                            background: today ? 'var(--primary-50)' : 'white',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s ease',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
+                                        }}
+                                    >
+                                        <div style={{ fontSize: '0.9rem', fontWeight: today ? 700 : 500, color: today ? 'var(--primary)' : 'var(--gray-700)', marginBottom: 4 }}>
+                                            {day}
+                                        </div>
+                                        {dayEvents.length > 0 && (
+                                            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
+                                                {dayEvents.slice(0, 2).map(event => (
+                                                    <div key={event.id} style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary)' }} />
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Events Sidebar */}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                    <div className="card" style={{ padding: 24, marginBottom: 24 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                            <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Upcoming Events</h3>
+                            <button onClick={() => setShowAddEvent(!showAddEvent)} className="btn btn-primary btn-sm">
+                                <Icons.Plus />
+                            </button>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            {events.slice(0, 5).map(event => (
+                                <div key={event.id} style={{ padding: 16, background: 'var(--gray-50)', borderRadius: 'var(--radius-md)', borderLeft: '3px solid var(--primary)' }}>
+                                    <div style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: 4 }}>{event.title}</div>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)' }}>
+                                        {event.date.toLocaleDateString()} • {event.time}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Stats */}
+                    <div className="card" style={{ padding: 24 }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 20 }}>This Month</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.9rem', color: 'var(--gray-600)' }}>Total Events</span>
+                                <span style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--primary)' }}>{events.length}</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.9rem', color: 'var(--gray-600)' }}>Meetings</span>
+                                <span style={{ fontSize: '1.3rem', fontWeight: 700 }}>{events.filter(e => e.type === 'meeting').length}</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.9rem', color: 'var(--gray-600)' }}>Calls</span>
+                                <span style={{ fontSize: '1.3rem', fontWeight: 700 }}>{events.filter(e => e.type === 'call').length}</span>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </div>
+    )
+}
+
+/* ===== ANALYTICS COMPONENT ===== */
+function Analytics({ user }) {
+    return (
+        <div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 style={{ fontSize: '2.2rem', marginBottom: 10, fontFamily: 'Poppins' }}>Analytics</h1>
+                <p style={{ color: 'var(--gray-500)', marginBottom: 48, fontSize: '1.05rem' }}>Track your performance metrics</p>
+            </motion.div>
+
+            {/* KPI Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24, marginBottom: 40 }}>
+                {[
+                    { label: 'Total Leads', value: '1,234', change: '+12.5%', positive: true },
+                    { label: 'Conversion Rate', value: '24.8%', change: '+3.2%', positive: true },
+                    { label: 'Active Campaigns', value: '8', change: '+2', positive: true },
+                    { label: 'Response Time', value: '2.4h', change: '-0.5h', positive: true },
+                ].map((kpi, idx) => (
+                    <motion.div key={idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }}>
+                        <div className="card" style={{ padding: 28 }}>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                {kpi.label}
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
+                                <div style={{ fontSize: '2rem', fontWeight: 700 }}>{kpi.value}</div>
+                                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: kpi.positive ? '#10B981' : '#EF4444' }}>
+                                    {kpi.change}
+                                </div>
+                            </div>
+                            <div style={{ height: 4, background: 'var(--gray-200)', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
+                                <div style={{ height: '100%', width: '70%', background: 'var(--gradient-card)', borderRadius: 'var(--radius-full)' }} />
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Charts Placeholder */}
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
+                <div className="card" style={{ padding: 32, minHeight: 400 }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: 24, fontWeight: 700 }}>Performance Overview</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, color: 'var(--gray-400)' }}>
+                        <Icons.Analytics />
+                        <span style={{ marginLeft: 12 }}>Chart visualization coming soon</span>
+                    </div>
+                </div>
+                <div className="card" style={{ padding: 32 }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: 24, fontWeight: 700 }}>Top Sources</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                        {['Website', 'Facebook Ads', 'Google Ads', 'Referrals'].map((source, idx) => (
+                            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.9rem' }}>{source}</span>
+                                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--primary)' }}>{Math.floor(Math.random() * 500)}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+/* ===== SERVICE SELECTION (NEW CLIENTS) ===== */
+function ServiceSelection({ user, onComplete }) {
+    const [selectedService, setSelectedService] = useState(null)
+    const [step, setStep] = useState(0) // 0: select service, 1: answer questions
+    const [answers, setAnswers] = useState({})
+
+    const updateAnswer = (key, val) => setAnswers(prev => ({ ...prev, [key]: val }))
+    const toggleMulti = (key, val) => {
+        const arr = answers[key] || []
+        updateAnswer(key, arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val])
+    }
+
+    const handleSubmit = () => {
+        const users = getUsers()
+        const updated = users.map(u => u.id === user.id ? { ...u, service: selectedService, serviceData: answers, onboarded: true } : u)
+        saveUsers(updated)
+        logActivity(user.id, 'service_selected', `Selected service: ${SERVICES.find(s => s.id === selectedService)?.name}`)
+        onComplete({ ...user, service: selectedService, serviceData: answers, onboarded: true })
+    }
+
+    if (step === 0) {
+        return (
+            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                    <div style={{ textAlign: 'center', marginBottom: 56 }}>
+                        <div style={{ display: 'inline-block', background: 'var(--primary-50)', color: 'var(--primary)', padding: '8px 20px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 600, marginBottom: 20, letterSpacing: '0.05em' }}>
+                            STEP 1 OF 2
+                        </div>
+                        <h1 style={{ fontSize: '2.5rem', marginBottom: 16, fontFamily: 'Poppins' }}>Welcome, {user.name}!</h1>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '1.15rem', maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>
+                            Choose the service that best fits your needs. You can select one service per account.
+                        </p>
+                    </div>
+                </motion.div>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 28 }}>
+                    {SERVICES.map((service, idx) => (
+                        <motion.div 
+                            key={service.id} 
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            onClick={() => setSelectedService(service.id)} 
+                            style={{
+                                background: selectedService === service.id ? 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' : 'white',
+                                border: `2px solid ${selectedService === service.id ? 'var(--primary)' : 'var(--gray-200)'}`,
+                                borderRadius: 'var(--radius-xl)',
+                                padding: 36,
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
+                                position: 'relative',
+                                overflow: 'hidden',
+                                boxShadow: selectedService === service.id ? '0 20px 40px rgba(30,58,138,0.15)' : '0 4px 12px rgba(0,0,0,0.05)',
+                            }}>
+                            {selectedService === service.id && (
+                                <div style={{ position: 'absolute', top: 16, right: 16, background: 'var(--primary)', color: 'white', width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icons.Check />
+                                </div>
+                            )}
+                            <div style={{ marginBottom: 20 }}>
+                                <ServiceIcon type={service.icon} color={service.color} />
+                            </div>
+                            <h3 style={{ fontSize: '1.3rem', marginBottom: 12, color: selectedService === service.id ? 'var(--primary)' : 'var(--gray-900)', fontFamily: 'Poppins', fontWeight: 700 }}>{service.name}</h3>
+                            <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem', lineHeight: 1.7 }}>{service.desc}</p>
+                        </motion.div>
+                    ))}
+                </div>
+
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} style={{ textAlign: 'center', marginTop: 48 }}>
+                    <button 
+                        onClick={() => selectedService && setStep(1)} 
+                        disabled={!selectedService} 
+                        className="btn btn-primary btn-lg" 
+                        style={{ 
+                            padding: '18px 48px',
+                            fontSize: '1.05rem',
+                            opacity: selectedService ? 1 : 0.5,
+                            cursor: selectedService ? 'pointer' : 'not-allowed',
+                        }}>
+                        Continue to Questions →
+                    </button>
+                </motion.div>
+            </div>
+        )
+    }
+
+    const questions = SERVICE_QUESTIONS[selectedService] || []
+    const serviceName = SERVICES.find(s => s.id === selectedService)?.name
+    const service = SERVICES.find(s => s.id === selectedService)
+
+    return (
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <button onClick={() => setStep(0)} className="btn btn-secondary btn-sm" style={{ marginBottom: 32 }}>
+                    <Icons.ArrowLeft /> Back to Services
+                </button>
+                
+                <div style={{ textAlign: 'center', marginBottom: 48 }}>
+                    <div style={{ display: 'inline-block', background: 'var(--primary-50)', color: 'var(--primary)', padding: '8px 20px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 600, marginBottom: 20, letterSpacing: '0.05em' }}>
+                        STEP 2 OF 2
+                    </div>
+                    <div style={{ marginBottom: 16 }}>
+                        <ServiceIcon type={service?.icon} color={service?.color} />
+                    </div>
+                    <h1 style={{ fontSize: '2rem', marginBottom: 12, fontFamily: 'Poppins' }}>{serviceName}</h1>
+                    <p style={{ color: 'var(--gray-500)', fontSize: '1.05rem', lineHeight: 1.7 }}>
+                        Help us customize your experience by answering a few questions.
+                    </p>
+                </div>
+
+                <div className="card" style={{ padding: 48, boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
+                    {questions.map((q, idx) => (
+                        <div key={q.key} style={{ marginBottom: idx < questions.length - 1 ? 40 : 0 }}>
+                            <label className="form-label" style={{ fontSize: '1rem', marginBottom: 14, display: 'block' }}>
+                                {idx + 1}. {q.label}
+                            </label>
+                            {q.type === 'select' && (
+                                <select className="form-select" value={answers[q.key] || ''} onChange={e => updateAnswer(q.key, e.target.value)} style={{ padding: '14px 18px', fontSize: '0.95rem' }}>
+                                    <option value="">Select an option</option>
+                                    {q.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                                </select>
+                            )}
+                            {q.type === 'multi' && (
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12, marginTop: 12 }}>
+                                    {q.options.map(opt => {
+                                        const sel = (answers[q.key] || []).includes(opt)
+                                        return (
+                                            <button key={opt} onClick={() => toggleMulti(q.key, opt)} style={{
+                                                padding: '14px 18px',
+                                                borderRadius: 'var(--radius-md)',
+                                                border: `2px solid ${sel ? 'var(--primary)' : 'var(--gray-200)'}`,
+                                                background: sel ? 'var(--primary-50)' : 'white',
+                                                cursor: 'pointer',
+                                                fontWeight: 600,
+                                                fontSize: '0.9rem',
+                                                color: sel ? 'var(--primary)' : 'var(--gray-600)',
+                                                transition: 'all 0.2s ease',
+                                                fontFamily: 'Inter',
+                                            }}>
+                                                {sel && <span style={{ marginRight: 6 }}>✓</span>}
+                                                {opt}
+                                            </button>
+                                        )
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+
+                    <button onClick={handleSubmit} className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 48, padding: '18px', fontSize: '1.05rem' }}>
+                        Complete Setup ✓
+                    </button>
+                </div>
+            </motion.div>
+        </div>
+    )
+}
+
+/* ===== CLIENT WELCOME DASHBOARD ===== */
+function ClientWelcome({ user }) {
+    const service = SERVICES.find(s => s.id === user.service)
+    
+    return (
+        <div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 style={{ fontSize: '2.2rem', marginBottom: 10, fontFamily: 'Poppins' }}>Welcome back, {user.name}</h1>
+                <p style={{ color: 'var(--gray-500)', marginBottom: 48, fontSize: '1.05rem' }}>Here's your dashboard overview</p>
+            </motion.div>
+
+            {/* Service Card */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                <div className="card" style={{ marginBottom: 40, background: 'var(--gradient-card)', color: 'white', border: 'none', boxShadow: '0 20px 40px rgba(30,58,138,0.25)', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', filter: 'blur(40px)' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 24, position: 'relative', zIndex: 1 }}>
+                        <div style={{ width: 80, height: 80, borderRadius: 'var(--radius-lg)', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <ServiceIcon type={service?.icon} color="white" />
+                        </div>
+                        <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: 6, letterSpacing: '0.05em', textTransform: 'uppercase', fontWeight: 600 }}>Your Active Service</div>
+                            <h2 style={{ fontSize: '1.8rem', marginBottom: 10, fontFamily: 'Poppins' }}>{service?.name}</h2>
+                            <p style={{ opacity: 0.9, fontSize: '1rem', lineHeight: 1.6 }}>{service?.desc}</p>
+                        </div>
+                        <div style={{ background: 'rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981' }} />
+                            ACTIVE
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Quick Stats */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24, marginBottom: 48 }}>
+                    <div className="card" style={{ textAlign: 'center', padding: 32 }}>
+                        <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #059669)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                            <Icons.Check />
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Account Status</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#10B981' }}>Active</div>
+                    </div>
+                    <div className="card" style={{ textAlign: 'center', padding: 32 }}>
+                        <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--gradient-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                            <Icons.Calendar />
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Member Since</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{user.created || 'Recently'}</div>
+                    </div>
+                    <div className="card" style={{ textAlign: 'center', padding: 32 }}>
+                        <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                            <Icons.Support />
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Support Status</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#8B5CF6' }}>Available</div>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Quick Actions */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: 24, fontFamily: 'Poppins' }}>Quick Actions</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+                    <div className="card" style={{ cursor: 'pointer', padding: 32, transition: 'all 0.3s ease', border: '2px solid var(--gray-200)' }}>
+                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: 'var(--primary)' }}>
+                            <Icons.Phone />
+                        </div>
+                        <h4 style={{ fontSize: '1.1rem', marginBottom: 10, fontWeight: 700 }}>Contact Support</h4>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.6 }}>Get help from our team anytime</p>
+                    </div>
+                    <div className="card" style={{ cursor: 'pointer', padding: 32, transition: 'all 0.3s ease', border: '2px solid var(--gray-200)' }}>
+                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: 'var(--primary)' }}>
+                            <Icons.File />
+                        </div>
+                        <h4 style={{ fontSize: '1.1rem', marginBottom: 10, fontWeight: 700 }}>View Documentation</h4>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.6 }}>Learn about your service features</p>
+                    </div>
+                    <div className="card" style={{ cursor: 'pointer', padding: 32, transition: 'all 0.3s ease', border: '2px solid var(--gray-200)' }}>
+                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: 'var(--primary)' }}>
+                            <Icons.Settings />
+                        </div>
+                        <h4 style={{ fontSize: '1.1rem', marginBottom: 10, fontWeight: 700 }}>Service Settings</h4>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.6 }}>Manage your preferences</p>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    )
+}
+
+/* ===== CLIENT MY SERVICE ===== */
+function ClientMyService({ user }) {
+    const service = SERVICES.find(s => s.id === user.service)
+    const serviceData = user.serviceData || {}
+
+    return (
+        <div>
+            <h1 style={{ fontSize: '2.2rem', marginBottom: 8, fontFamily: 'Poppins' }}>{service?.name}</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 48, fontSize: '1.05rem' }}>Your service details and configuration</p>
+
+            {/* Service Overview */}
+            <div className="card" style={{ marginBottom: 32, padding: 40 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 32 }}>
+                    <div style={{ width: 80, height: 80, borderRadius: 'var(--radius-lg)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <ServiceIcon type={service?.icon} color={service?.color} />
+                    </div>
+                    <div>
+                        <h2 style={{ fontSize: '1.5rem', marginBottom: 6, fontFamily: 'Poppins' }}>{service?.name}</h2>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '1rem' }}>{service?.desc}</p>
+                    </div>
+                </div>
+
+                <div style={{ borderTop: '1px solid var(--gray-200)', paddingTop: 32 }}>
+                    <h3 style={{ fontSize: '1.1rem', marginBottom: 20, fontWeight: 700 }}>Your Configuration</h3>
+                    {Object.keys(serviceData).length > 0 ? (
+                        <div style={{ display: 'grid', gap: 16 }}>
+                            {Object.entries(serviceData).map(([key, val]) => (
+                                <div key={key} style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 0', borderBottom: '1px solid var(--gray-100)' }}>
+                                    <span style={{ color: 'var(--gray-500)', fontSize: '0.95rem', textTransform: 'capitalize', fontWeight: 500 }}>{key.replace(/([A-Z])/g, ' $1')}</span>
+                                    <span style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--gray-900)' }}>{Array.isArray(val) ? val.join(', ') : val}</span>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p style={{ color: 'var(--gray-400)', fontSize: '0.95rem' }}>No configuration data available</p>
+                    )}
+                </div>
+            </div>
+
+            {/* Service Features */}
+            <h3 style={{ fontSize: '1.3rem', marginBottom: 24, fontFamily: 'Poppins' }}>What's Included</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
+                {[
+                    { icon: Icons.Check, title: '24/7 Automation', desc: 'Your service runs continuously' },
+                    { icon: Icons.Analytics, title: 'Real-time Analytics', desc: 'Track performance metrics' },
+                    { icon: Icons.Settings, title: 'Secure & Reliable', desc: 'Enterprise-grade security' },
+                    { icon: Icons.Support, title: 'Priority Support', desc: 'Get help when you need it' },
+                ].map((feature, idx) => (
+                    <div key={idx} className="card" style={{ padding: 28 }}>
+                        <div style={{ width: 48, height: 48, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: 'var(--primary)' }}>
+                            <feature.icon />
+                        </div>
+                        <h4 style={{ fontSize: '1.05rem', marginBottom: 10, fontWeight: 700 }}>{feature.title}</h4>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.6 }}>{feature.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+/* ===== CLIENT SUPPORT ===== */
+function ClientSupport() {
+    return (
+        <div>
+            <h1 style={{ fontSize: '2.2rem', marginBottom: 8, fontFamily: 'Poppins' }}>Support Center</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 48, fontSize: '1.05rem' }}>We're here to help you succeed</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, marginBottom: 32 }}>
+                <div className="card" style={{ padding: 32 }}>
+                    <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, color: 'var(--primary)' }}>
+                        <Icons.Mail />
+                    </div>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: 12, fontWeight: 700 }}>Email Support</h3>
+                    <p style={{ color: 'var(--gray-500)', marginBottom: 20, fontSize: '0.95rem', lineHeight: 1.6 }}>Send us an email and we'll respond within 24 hours</p>
+                    <a href="mailto:Arcanextofficial@gmail.com" className="btn btn-primary btn-sm">Send Email</a>
+                </div>
+
+                <div className="card" style={{ padding: 32 }}>
+                    <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, color: 'var(--primary)' }}>
+                        <Icons.Phone />
+                    </div>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: 12, fontWeight: 700 }}>Phone Support</h3>
+                    <p style={{ color: 'var(--gray-500)', marginBottom: 20, fontSize: '0.95rem', lineHeight: 1.6 }}>Call us directly for immediate assistance</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        <a href="tel:+918693852452" className="btn btn-secondary btn-sm">+91 8693852452 (Rishi)</a>
+                        <a href="tel:+918591545882" className="btn btn-secondary btn-sm">+91 8591545882 (Ayush)</a>
+                    </div>
+                </div>
+
+                <div className="card" style={{ padding: 32 }}>
+                    <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, color: 'var(--primary)' }}>
+                        <Icons.Support />
+                    </div>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: 12, fontWeight: 700 }}>Live Chat</h3>
+                    <p style={{ color: 'var(--gray-500)', marginBottom: 20, fontSize: '0.95rem', lineHeight: 1.6 }}>Chat with us on WhatsApp for quick support</p>
+                    <a href="https://wa.me/918693852452?text=Hi%2C%20I%20need%20support%20with%20my%20Arcanext%20service." target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Open WhatsApp</a>
+                </div>
+            </div>
+
+            <div className="card" style={{ padding: 32, background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)', border: '2px solid var(--primary-200)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
+                    <div style={{ width: 48, height: 48, borderRadius: 'var(--radius-md)', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Icons.File />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <h3 style={{ fontSize: '1.2rem', marginBottom: 12, color: 'var(--primary)', fontWeight: 700 }}>Documentation</h3>
+                        <p style={{ color: 'var(--gray-700)', fontSize: '0.95rem', marginBottom: 20, lineHeight: 1.6 }}>Browse our comprehensive guides and tutorials to get the most out of your service.</p>
+                        <button className="btn btn-secondary btn-sm">View Documentation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+/* ===== ADMIN OVERVIEW ===== */
+function AdminOverview() {
+    const users = getUsers()
+    const activities = JSON.parse(localStorage.getItem('arcanext_activities') || '[]')
+    const activeUsers = users.filter(u => u.active).length
+    const totalServices = users.filter(u => u.service).length
+
+    return (
+        <div>
+            <h1 style={{ fontSize: '1.8rem', marginBottom: 8 }}>Dashboard Overview</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 40, fontSize: '1.05rem' }}>System statistics and insights</p>
+
+            {/* Stats Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24, marginBottom: 32 }}>
+                <div className="card">
+                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8 }}>Total Users</div>
+                    <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)' }}>{users.length}</div>
+                </div>
+                <div className="card">
+                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8 }}>Active Users</div>
+                    <div style={{ fontSize: '2rem', fontWeight: 700, color: '#16A34A' }}>{activeUsers}</div>
+                </div>
+                <div className="card">
+                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8 }}>Services Active</div>
+                    <div style={{ fontSize: '2rem', fontWeight: 700 }}>{totalServices}</div>
+                </div>
+                <div className="card">
+                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8 }}>Recent Activity</div>
+                    <div style={{ fontSize: '2rem', fontWeight: 700 }}>{activities.length}</div>
+                </div>
+            </div>
+
+            {/* Service Distribution */}
+            <h3 style={{ fontSize: '1.2rem', marginBottom: 20 }}>Service Distribution</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
+                {SERVICES.map(service => {
+                    const count = users.filter(u => u.service === service.id).length
+                    return (
+                        <div key={service.id} className="card" style={{ textAlign: 'center' }}>
+                            <div style={{ fontSize: '2rem', marginBottom: 8 }}>{service.icon}</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 4 }}>{count}</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)' }}>{service.name}</div>
+                        </div>
+                    )
+                })}
+            </div>
+
+            {/* Recent Activity */}
+            <h3 style={{ fontSize: '1.2rem', marginBottom: 20 }}>Recent Activity</h3>
+            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                {activities.slice(-10).reverse().map(act => (
+                    <div key={act.id} style={{ padding: '16px 24px', borderBottom: '1px solid var(--gray-100)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div>
+                                <div style={{ fontWeight: 600, fontSize: '0.9rem', marginBottom: 4 }}>{act.action}</div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)' }}>{act.details}</div>
+                            </div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--gray-400)' }}>
+                                {new Date(act.timestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                {activities.length === 0 && (
+                    <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--gray-400)' }}>No activity yet</div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+/* ===== ADMIN USER MANAGEMENT ===== */
+function AdminUserManagement() {
+    const [users, setUsers] = useState(getUsers)
+    const [showCreate, setShowCreate] = useState(false)
+    const [editUser, setEditUser] = useState(null)
+    const [newName, setNewName] = useState('')
+    const [newEmail, setNewEmail] = useState('')
+    const [toast, setToast] = useState('')
+
+    const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
+
+    const createUser = () => {
+        if (!newName.trim()) return
+        const u = { 
+            id: Date.now(), 
+            name: newName.trim(), 
+            email: newEmail.trim(), 
+            role: 'client', 
+            username: generateId(), 
+            password: generateId(), 
+            active: true, 
+            created: new Date().toLocaleDateString(),
+            service: null,
+            serviceData: {},
+            onboarded: false
+        }
+        const updated = [...users, u]
+        setUsers(updated); saveUsers(updated)
+        setNewName(''); setNewEmail(''); setShowCreate(false)
+        logActivity('admin', 'user_created', `Created user: ${u.name}`)
+        showToast(`User "${u.name}" created — ID: ${u.username}`)
+    }
+
+    const toggleUser = (uid) => {
+        const updated = users.map(u => u.id === uid ? { ...u, active: !u.active } : u)
+        setUsers(updated); saveUsers(updated)
+        logActivity('admin', 'user_toggled', `Toggled user status: ${users.find(u => u.id === uid)?.name}`)
+    }
+
+    const deleteUser = (uid) => {
+        if (!confirm('Are you sure you want to delete this user?')) return
+        const userName = users.find(u => u.id === uid)?.name
+        const updated = users.filter(u => u.id !== uid)
+        setUsers(updated); saveUsers(updated)
+        logActivity('admin', 'user_deleted', `Deleted user: ${userName}`)
+        showToast('User deleted')
+    }
+
+    const startEdit = (user) => {
+        setEditUser(user)
+        setNewName(user.name)
+        setNewEmail(user.email || '')
+    }
+
+    const saveEdit = () => {
+        const updated = users.map(u => u.id === editUser.id ? { ...u, name: newName.trim(), email: newEmail.trim() } : u)
+        setUsers(updated); saveUsers(updated)
+        logActivity('admin', 'user_edited', `Edited user: ${newName}`)
+        showToast('User updated')
+        setEditUser(null)
+        setNewName('')
+        setNewEmail('')
+    }
+
+    return (
+        <div>
+            <AnimatePresence>
+                {toast && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: -20, scale: 0.95 }} 
+                        animate={{ opacity: 1, y: 0, scale: 1 }} 
+                        exit={{ opacity: 0, y: -20, scale: 0.95 }} 
+                        style={{ 
+                            position: 'fixed', 
+                            top: 100, 
+                            right: 40, 
+                            background: 'linear-gradient(135deg, #1F2937, #111827)', 
+                            color: 'white', 
+                            padding: '16px 28px', 
+                            borderRadius: 'var(--radius-lg)', 
+                            fontSize: '0.95rem', 
+                            fontWeight: 500, 
+                            zIndex: 1100, 
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 12
+                        }}>
+                        <span style={{ fontSize: '1.2rem' }}>✓</span>
+                        <span>{toast}</span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
+                    <div>
+                        <h1 style={{ fontSize: '2.2rem', marginBottom: 8, fontFamily: 'Poppins' }}>User Management</h1>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '1rem' }}>
+                            <span style={{ fontWeight: 600, color: 'var(--primary)' }}>{users.length}</span> total users • 
+                            <span style={{ fontWeight: 600, color: '#10B981', marginLeft: 8 }}>{users.filter(u => u.active).length}</span> active
+                        </p>
+                    </div>
+                    <button onClick={() => { setShowCreate(!showCreate); setEditUser(null) }} className="btn btn-primary btn-lg">
+                        + Create User
+                    </button>
+                </div>
+            </motion.div>
+
+            <AnimatePresence>
+                {(showCreate || editUser) && (
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden', marginBottom: 32 }}>
+                        <div className="card" style={{ padding: 40, background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)', border: '2px solid var(--primary-200)' }}>
+                            <h3 style={{ fontSize: '1.3rem', marginBottom: 24, fontFamily: 'Poppins' }}>
+                                {editUser ? '✏️ Edit User' : '➕ Create New User'}
+                            </h3>
+                            <div className="grid-2" style={{ gap: 24 }}>
+                                <div className="form-group" style={{ margin: 0 }}>
+                                    <label className="form-label" style={{ fontSize: '0.9rem', fontWeight: 600 }}>Full Name</label>
+                                    <input className="form-input" placeholder="John Doe" value={newName} onChange={e => setNewName(e.target.value)} style={{ padding: '14px 18px' }} />
+                                </div>
+                                <div className="form-group" style={{ margin: 0 }}>
+                                    <label className="form-label" style={{ fontSize: '0.9rem', fontWeight: 600 }}>Email Address</label>
+                                    <input className="form-input" placeholder="john@company.com" value={newEmail} onChange={e => setNewEmail(e.target.value)} style={{ padding: '14px 18px' }} />
+                                </div>
+                            </div>
+                            {!editUser && (
+                                <div style={{ background: 'var(--primary-50)', padding: '14px 18px', borderRadius: 'var(--radius-md)', marginTop: 20, border: '1px solid var(--primary-200)' }}>
+                                    <p style={{ fontSize: '0.85rem', color: 'var(--primary)', margin: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
+                                        <span>ℹ️</span>
+                                        <span>An 8-digit username and password will be auto-generated for security.</span>
+                                    </p>
+                                </div>
+                            )}
+                            <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
+                                <button onClick={editUser ? saveEdit : createUser} className="btn btn-primary">
+                                    {editUser ? '💾 Save Changes' : '✓ Create User'}
+                                </button>
+                                <button onClick={() => { setShowCreate(false); setEditUser(null); setNewName(''); setNewEmail('') }} className="btn btn-secondary">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {users.length === 0 ? (
+                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+                    <div className="card" style={{ textAlign: 'center', padding: '80px 24px', background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: 24, opacity: 0.5 }}>👥</div>
+                        <h3 style={{ fontSize: '1.3rem', marginBottom: 12, fontFamily: 'Poppins' }}>No Users Yet</h3>
+                        <p style={{ color: 'var(--gray-500)', fontSize: '1rem', marginBottom: 24 }}>Click "Create User" to add your first client.</p>
+                        <button onClick={() => setShowCreate(true)} className="btn btn-primary">Get Started</button>
+                    </div>
+                </motion.div>
+            ) : (
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                    <div className="card" style={{ padding: 0, overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'Inter', fontSize: '0.9rem' }}>
+                            <thead>
+                                <tr style={{ background: 'linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%)', borderBottom: '2px solid var(--gray-200)' }}>
+                                    {['Name', 'Service', 'Username', 'Password', 'Status', 'Actions'].map(h => (
+                                        <th key={h} style={{ padding: '18px 24px', textAlign: 'left', fontWeight: 700, color: 'var(--gray-700)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{h}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.map((u, idx) => {
+                                    const service = SERVICES.find(s => s.id === u.service)
+                                    return (
+                                        <motion.tr 
+                                            key={u.id} 
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: idx * 0.05 }}
+                                            style={{ borderBottom: '1px solid var(--gray-100)', background: idx % 2 === 0 ? 'white' : 'var(--gray-50)' }}>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                <div style={{ fontWeight: 600, marginBottom: 4 }}>{u.name}</div>
+                                                <div style={{ fontSize: '0.8rem', color: 'var(--gray-400)' }}>{u.email}</div>
+                                            </td>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                {service ? (
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                                        <span style={{ fontSize: '1.2rem' }}>{service.icon}</span>
+                                                        <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>{service.name}</span>
+                                                    </div>
+                                                ) : (
+                                                    <span style={{ color: 'var(--gray-400)', fontSize: '0.85rem', fontStyle: 'italic' }}>Not selected</span>
+                                                )}
+                                            </td>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                <code style={{ background: 'var(--primary-50)', color: 'var(--primary)', padding: '6px 12px', borderRadius: 6, fontSize: '0.8rem', fontWeight: 700, border: '1px solid var(--primary-200)' }}>{u.username}</code>
+                                            </td>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                <code style={{ background: 'var(--gray-100)', padding: '6px 12px', borderRadius: 6, fontSize: '0.8rem', fontWeight: 700, border: '1px solid var(--gray-200)' }}>{u.password}</code>
+                                            </td>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                <button onClick={() => toggleUser(u.id)} style={{ 
+                                                    padding: '6px 16px', 
+                                                    borderRadius: 'var(--radius-full)', 
+                                                    border: 'none', 
+                                                    cursor: 'pointer', 
+                                                    fontSize: '0.75rem', 
+                                                    fontWeight: 700, 
+                                                    background: u.active ? 'linear-gradient(135deg, #DCFCE7, #BBF7D0)' : 'linear-gradient(135deg, #FEE2E2, #FECACA)', 
+                                                    color: u.active ? '#15803D' : '#B91C1C',
+                                                    letterSpacing: '0.05em',
+                                                    textTransform: 'uppercase'
+                                                }}>
+                                                    {u.active ? '● Active' : '○ Disabled'}
+                                                </button>
+                                            </td>
+                                            <td style={{ padding: '18px 24px' }}>
+                                                <div style={{ display: 'flex', gap: 10 }}>
+                                                    <button onClick={() => startEdit(u)} title="Edit" style={{ padding: '8px 14px', borderRadius: 6, border: '1px solid var(--primary-200)', background: 'var(--primary-50)', cursor: 'pointer', fontSize: '0.85rem', transition: 'all 0.2s ease' }}>✏️</button>
+                                                    <button onClick={() => deleteUser(u.id)} title="Delete" style={{ padding: '8px 14px', borderRadius: 6, border: '1px solid #FCA5A5', background: '#FEF2F2', cursor: 'pointer', fontSize: '0.85rem', transition: 'all 0.2s ease' }}>🗑️</button>
+                                                </div>
+                                            </td>
+                                        </motion.tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </motion.div>
+            )}
+        </div>
+    )
+}
+
+/* ===== ADMIN ALL SERVICES ===== */
+function AdminAllServices() {
+    const users = getUsers()
+
+    return (
+        <div>
+            <h1 style={{ fontSize: '1.8rem', marginBottom: 8 }}>All Services</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 40, fontSize: '1.05rem' }}>Overview of all available services</p>
+
+                        <div style={{ display: 'grid', gap: 24 }}>
+                {SERVICES.map(service => {
+                    const userCount = users.filter(u => u.service === service.id).length
+                    const serviceUsers = users.filter(u => u.service === service.id)
+
+                    return (
+                        <div key={service.id} className="card" style={{ padding: 32 }}>
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24 }}>
+                                <div style={{ width: 64, height: 64, borderRadius: 'var(--radius-lg)', background: `${service.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <ServiceIcon type={service.icon} color={service.color} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                                        <div>
+                                            <h3 style={{ fontSize: '1.3rem', marginBottom: 6, fontFamily: 'Poppins' }}>{service.name}</h3>
+                                            <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem' }}>{service.desc}</p>
+                                        </div>
+                                        <div style={{ background: 'var(--primary-50)', color: 'var(--primary)', padding: '8px 20px', borderRadius: 'var(--radius-full)', fontSize: '0.9rem', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                                            {userCount} {userCount === 1 ? 'User' : 'Users'}
+                                        </div>
+                                    </div>
+
+                                    {serviceUsers.length > 0 && (
+                                        <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid var(--gray-200)' }}>
+                                            <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Active Users:</div>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                                                {serviceUsers.map(u => (
+                                                    <div key={u.id} style={{ background: 'var(--gray-100)', padding: '6px 16px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 500 }}>
+                                                        {u.name}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+/* ===== ADMIN ACTIVITY LOG ===== */
+function AdminActivityLog() {
+    const activities = JSON.parse(localStorage.getItem('arcanext_activities') || '[]')
+    const users = getUsers()
+
+    const getUserName = (userId) => {
+        if (userId === 'admin') return 'Administrator'
+        return users.find(u => u.id === userId)?.name || 'Unknown User'
+    }
+
+    return (
+        <div>
+            <h1 style={{ fontSize: '1.8rem', marginBottom: 8 }}>Activity Log</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 40, fontSize: '1.05rem' }}>Track all user and system activities</p>
+
+            {activities.length === 0 ? (
+                <div className="card" style={{ textAlign: 'center', padding: '60px 24px' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: 16 }}>📊</div>
+                    <h3 style={{ fontSize: '1.1rem', marginBottom: 8 }}>No Activity Yet</h3>
+                    <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>Activity will appear here as users interact with the system.</p>
+                </div>
+            ) : (
+                <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                    {activities.slice().reverse().map((act, idx) => (
+                        <div key={act.id} style={{ 
+                            padding: '20px 24px', 
+                            borderBottom: idx < activities.length - 1 ? '1px solid var(--gray-100)' : 'none',
+                            background: idx % 2 === 0 ? 'white' : 'var(--gray-50)'
+                        }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+                                        <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>{getUserName(act.userId)}</span>
+                                        <span style={{ background: 'var(--primary-100)', color: 'var(--primary)', padding: '2px 10px', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 600 }}>
+                                            {act.action.replace(/_/g, ' ').toUpperCase()}
+                                        </span>
+                                    </div>
+                                    {act.details && <div style={{ fontSize: '0.85rem', color: 'var(--gray-600)' }}>{act.details}</div>}
+                                </div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--gray-400)', whiteSpace: 'nowrap', marginLeft: 16 }}>
+                                    {new Date(act.timestamp).toLocaleString()}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}
+
+/* ===== ADMIN SETTINGS ===== */
+function AdminSettings() {
+    return (
+        <div>
+            <h1 style={{ fontSize: '1.8rem', marginBottom: 8 }}>Settings</h1>
+            <p style={{ color: 'var(--gray-500)', marginBottom: 40, fontSize: '1.05rem' }}>System configuration and preferences</p>
+
+            <div className="card" style={{ marginBottom: 24 }}>
+                <h3 style={{ fontSize: '1.1rem', marginBottom: 16 }}>Admin Credentials</h3>
+                <div style={{ display: 'grid', gap: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--gray-100)' }}>
+                        <span style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>Username</span>
+                        <code style={{ fontWeight: 600, fontSize: '0.9rem', background: 'var(--gray-100)', padding: '4px 12px', borderRadius: 4 }}>{ADMIN_ID}</code>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--gray-100)' }}>
+                        <span style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>Password</span>
+                        <code style={{ fontWeight: 600, fontSize: '0.9rem', background: 'var(--gray-100)', padding: '4px 12px', borderRadius: 4 }}>{ADMIN_PW}</code>
+                    </div>
+                </div>
+            </div>
+
+            <div className="card">
+                <h3 style={{ fontSize: '1.1rem', marginBottom: 16 }}>System Information</h3>
+                <div style={{ display: 'grid', gap: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--gray-100)' }}>
+                        <span style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>Total Services</span>
+                        <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{SERVICES.length}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--gray-100)' }}>
+                        <span style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>Total Users</span>
+                        <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{getUsers().length}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>
+                        <span style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>System Status</span>
+                        <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#16A34A' }}>✓ Operational</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+/* ===== MAIN PORTAL DASHBOARD ===== */
+function PortalDashboard({ user, onLogout }) {
+    const [currentUser, setCurrentUser] = useState(user)
+    const [view, setView] = useState(() => {
+        if (currentUser.role === 'admin') return 'overview'
+        if (!currentUser.onboarded || !currentUser.service) return 'service-selection'
+        return 'welcome'
+    })
+
+    const handleServiceComplete = (updatedUser) => {
+        setCurrentUser(updatedUser)
+        setView('welcome')
+    }
+
+    // If client hasn't selected service yet, show service selection
+    if (currentUser.role !== 'admin' && (!currentUser.onboarded || !currentUser.service)) {
+        return (
+            <div style={{ minHeight: '100vh', paddingTop: 80, background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)' }}>
+                <div style={{ padding: '60px 48px' }}>
+                    <ServiceSelection user={currentUser} onComplete={handleServiceComplete} />
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div style={{ display: 'flex', minHeight: '100vh', paddingTop: 80, background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)' }}>
+            <Sidebar currentView={view} setView={setView} user={currentUser} onLogout={onLogout} />
+            <div style={{ flex: 1, padding: '60px 56px', minHeight: 'calc(100vh - 80px)', maxWidth: 1400, margin: '0 auto', width: '100%' }} className="portal-main">
+                {currentUser.role === 'admin' ? (
+                    view === 'overview' ? <AdminOverview /> :
+                    view === 'users' ? <AdminUserManagement /> :
+                    view === 'services' ? <AdminAllServices /> :
+                    view === 'calendar' ? <Calendar user={currentUser} /> :
+                    view === 'activity' ? <AdminActivityLog /> :
+                    view === 'settings' ? <AdminSettings /> :
+                    <div><h1 style={{ fontSize: '1.5rem' }}>Coming Soon</h1></div>
+                ) : (
+                    view === 'welcome' ? <ClientWelcome user={currentUser} /> :
+                    view === 'my-service' ? <ClientMyService user={currentUser} /> :
+                    view === 'calendar' ? <Calendar user={currentUser} /> :
+                    view === 'analytics' ? <Analytics user={currentUser} /> :
+                    view === 'support' ? <ClientSupport /> :
+                    <div><h1 style={{ fontSize: '1.5rem' }}>Coming Soon</h1></div>
+                )}
+            </div>
+            <style>{`
+                @media (max-width: 768px) { 
+                    .portal-sidebar { display: none !important; } 
+                    .portal-main { padding: 32px 20px !important; } 
+                }
+                .card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+                }
+            `}</style>
+        </div>
+    )
+}
+
+/* ===== MAIN EXPORT ===== */
+export default function UnifiedPortal() {
+    const [user, setUser] = useState(null)
+    
+    if (!user) return <LoginScreen onLogin={setUser} />
+    return <PortalDashboard user={user} onLogout={() => setUser(null)} />
+}
