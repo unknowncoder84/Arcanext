@@ -53,7 +53,7 @@ function Hero() {
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: '120px',
+            paddingTop: '140px',
             paddingBottom: '80px',
         }}>
             {/* Animated Liquid Blobs */}
@@ -73,7 +73,7 @@ function Hero() {
 
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                    <div style={{ maxWidth: '700px' }}>
+                    <div style={{ maxWidth: '700px', padding: '0 16px' }}>
                         {/* Badge */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -100,19 +100,21 @@ function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                             style={{ 
-                                fontSize: 'clamp(2.8rem, 6vw, 4.5rem)', 
+                                fontSize: 'clamp(2rem, 6vw, 4.5rem)', 
                                 color: 'white', 
                                 marginBottom: '28px', 
-                                lineHeight: 1.1, 
+                                lineHeight: 1.15, 
                                 fontWeight: 800,
-                                fontFamily: 'Poppins'
+                                fontFamily: 'Poppins',
+                                wordBreak: 'break-word'
                             }}
                         >
                             Every Lead Inquiry Answered{' '}
                             <span style={{ 
                                 background: 'linear-gradient(135deg, #3B82F6, #60A5FA)', 
                                 WebkitBackgroundClip: 'text', 
-                                WebkitTextFillColor: 'transparent' 
+                                WebkitTextFillColor: 'transparent',
+                                display: 'inline-block'
                             }}>
                                 Within 60 Seconds
                             </span>
@@ -125,10 +127,11 @@ function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.2 }}
                             style={{ 
-                                fontSize: '1.25rem', 
+                                fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
                                 color: 'rgba(255,255,255,0.85)', 
-                                lineHeight: 1.8, 
-                                marginBottom: '48px'
+                                lineHeight: 1.7, 
+                                marginBottom: '48px',
+                                wordBreak: 'break-word'
                             }}
                         >
                             From missed calls and website forms to portal leads and WhatsApp messages — we engage, qualify, and book appointments instantly so your agents only handle serious prospects.
@@ -139,14 +142,14 @@ function Hero() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 }}
-                            style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}
+                            style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}
                         >
                             <Link 
                                 to="/contact"
                                 className="btn hw-accelerate"
                                 style={{ 
-                                    padding: '20px 48px',
-                                    fontSize: '1.1rem',
+                                    padding: '18px 40px',
+                                    fontSize: '1.05rem',
                                     fontWeight: 700,
                                     borderRadius: '9999px',
                                     background: 'linear-gradient(135deg, #3B82F6, #60A5FA)',
@@ -155,7 +158,9 @@ function Hero() {
                                     transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
                                     border: 'none',
                                     cursor: 'pointer',
-                                    display: 'inline-block'
+                                    display: 'inline-block',
+                                    textAlign: 'center',
+                                    minWidth: '200px'
                                 }}
                                 onMouseEnter={e => {
                                     e.target.style.transform = 'translateY(-3px)'
@@ -172,12 +177,14 @@ function Hero() {
                                 to="/case-studies" 
                                 className="btn btn-outline btn-lg hw-accelerate" 
                                 style={{ 
-                                    padding: '20px 48px', 
-                                    fontSize: '1.1rem',
+                                    padding: '18px 40px', 
+                                    fontSize: '1.05rem',
                                     background: 'rgba(255, 255, 255, 0.08)',
                                     backdropFilter: 'blur(12px)',
                                     border: '2px solid rgba(255, 255, 255, 0.2)',
-                                    color: 'white'
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    minWidth: '200px'
                                 }}
                             >
                                 View Case Studies
