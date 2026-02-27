@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 const footerLinks = {
     Company: [
@@ -35,14 +36,18 @@ export default function Footer() {
                 }} className="footer-grid">
                     {/* Brand */}
                     <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
                             <div style={{
-                                width: 36, height: 36, borderRadius: 'var(--radius-sm)',
-                                background: 'var(--gradient-card)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                color: 'white', fontWeight: 800, fontSize: '1.1rem', fontFamily: 'Poppins, sans-serif',
-                            }}>A</div>
-                            <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1.3rem' }}>Arcanext</span>
-                        </div>
+                                width: 40,
+                                height: 40,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}>
+                                <Logo size={40} color="#FFFFFF" />
+                            </div>
+                            <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1.3rem', color: 'white' }}>Arcanext</span>
+                        </Link>
                         <p style={{ color: 'var(--gray-400)', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '300px' }}>
                             AI-powered automation systems that help businesses capture, nurture, and convert leads automatically.
                         </p>
