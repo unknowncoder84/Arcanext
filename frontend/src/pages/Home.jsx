@@ -1,232 +1,254 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/AnimatedSection'
+import { LiquidGlassCard, LiquidBlob, GlassSection } from '../components/LiquidGlass'
 
 /* ===== DATA ===== */
 const services = [
-    { icon: '🎯', title: 'Lead Capture Automation', desc: 'Automatically capture leads from every channel — websites, ads, social, and more.' },
-    { icon: '🤖', title: 'AI Follow-Up Systems', desc: 'Intelligent follow-ups via email, SMS, and WhatsApp that convert faster.' },
-    { icon: '⚙️', title: 'CRM Automation', desc: 'Seamless CRM workflows that keep your pipeline organized and moving.' },
-    { icon: '📊', title: 'Reporting Dashboards', desc: 'Real-time dashboards that track KPIs, ROI, and team performance.' },
-    { icon: '🔗', title: 'Custom Integrations', desc: 'Connect your entire tech stack — Stripe, Zapier, Calendly, and more.' },
+    { 
+        title: '24/7 AI Voice Agents', 
+        desc: 'AI-powered voice agents that engage leads within 60 seconds, qualify buyers and sellers, and book appointments automatically.',
+        image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop'
+    },
+    { 
+        title: 'Lead Qualification System', 
+        desc: 'Intelligent lead scoring and qualification that identifies hot prospects before they reach your desk.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop'
+    },
+    { 
+        title: 'Automated Follow-Up', 
+        desc: 'Multi-channel follow-up sequences via voice, SMS, and email that nurture leads until they\'re ready to close.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'
+    },
+    { 
+        title: 'Showing Scheduler', 
+        desc: 'Automated appointment booking that syncs with your calendar and sends reminders to reduce no-shows.',
+        image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop'
+    },
+    { 
+        title: 'CRM Integration', 
+        desc: 'Seamless integration with Follow Up Boss, LionDesk, kvCORE, and all major real estate CRMs.',
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop'
+    },
+    { 
+        title: 'Real-Time Analytics', 
+        desc: 'Track lead response times, conversion rates, and ROI with beautiful real-time dashboards.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'
+    },
 ]
 
 const steps = [
-    { num: '01', title: 'Capture Leads', desc: 'We build automated systems that capture leads from all your channels 24/7.' },
-    { num: '02', title: 'Automate Follow-Up', desc: 'AI-powered sequences nurture every lead with personalized communication.' },
-    { num: '03', title: 'Scale Revenue', desc: 'Watch your pipeline grow as automation handles the heavy lifting.' },
-]
-
-const industries = [
-    { icon: '📣', title: 'Marketing Agencies', desc: 'Auto lead routing, campaign dashboards, and client reporting automation.' },
-    { icon: '🏠', title: 'Real Estate', desc: 'Property inquiry automation, lead scoring, and scheduling workflows.' },
-    { icon: '💻', title: 'SaaS Companies', desc: 'Trial-to-paid conversion funnels and product-led growth automation.' },
-    { icon: '🛠️', title: 'Service Businesses', desc: 'Quote automation, booking systems, and customer lifecycle management.' },
+    { num: '01', title: 'Capture Every Lead', desc: 'AI agents respond to inquiries within 60 seconds, 24/7. No lead goes cold.' },
+    { num: '02', title: 'Qualify & Nurture', desc: 'Smart qualification questions identify serious buyers. Automated follow-ups keep them engaged.' },
+    { num: '03', title: 'Book & Close', desc: 'Appointments automatically scheduled. You focus on showing properties and closing deals.' },
 ]
 
 const metrics = [
-    { value: '42%', label: 'More Booked Calls' },
-    { value: '35%', label: 'Faster Response' },
-    { value: '28%', label: 'Revenue Growth' },
-    { value: '60%', label: 'Pipeline Visibility' },
+    { value: '60s', label: 'Average Response Time' },
+    { value: '3x', label: 'More Qualified Leads' },
+    { value: '45%', label: 'Increase in Showings' },
+    { value: '24/7', label: 'Always Available' },
 ]
 
-const pricingPlans = [
-    { name: 'Starter', setup: '$1,000', monthly: '$500', features: ['Lead Capture Setup', 'Email Automation', 'Basic Reporting', 'CRM Integration', 'Email Support'] },
-    { name: 'Growth', setup: '$2,500', monthly: '$1,200', popular: true, features: ['Everything in Starter', 'AI Follow-Up Systems', 'Advanced Dashboards', 'Multi-Channel Automation', 'Priority Support', 'Custom Workflows'] },
-    { name: 'Scale', setup: 'Custom', monthly: 'Custom', features: ['Everything in Growth', 'Dedicated AI Specialist', 'Enterprise Integrations', 'SLA Guarantee', 'White-Glove Onboarding', 'Custom Development'] },
-]
-
-/* ===== HERO ===== */
+/* ===== HERO WITH LIQUID GLASS ===== */
 function Hero() {
     return (
-        <section style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.97) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(51, 65, 85, 0.93) 100%), url("https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&h=1080&fit=crop&q=80") center/cover fixed',
+        <GlassSection style={{
+            background: 'linear-gradient(135deg, #0A1628 0%, #1E293B 50%, #2D1B69 100%)',
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
-            position: 'relative',
-            overflow: 'hidden',
+            paddingTop: '120px',
+            paddingBottom: '80px',
         }}>
-            {/* Animated Neural Network Pattern */}
-            <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', opacity: 0.15 }}>
-                <motion.div animate={{ x: [0, 30, 0], y: [0, -20, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', top: '10%', right: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent 70%)', filter: 'blur(80px)' }} />
-                <motion.div animate={{ x: [0, -20, 0], y: [0, 30, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', bottom: '10%', left: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%)', filter: 'blur(80px)' }} />
-                <motion.div animate={{ x: [0, 15, 0], y: [0, 15, 0] }} transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', top: '40%', left: '30%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16, 185, 129, 0.4), transparent 70%)', filter: 'blur(80px)' }} />
-            </div>
+            {/* Animated Liquid Blobs */}
+            <LiquidBlob color="blue" size={600} top="5%" right="5%" delay={0} />
+            <LiquidBlob color="gold" size={500} bottom="10%" left="5%" delay={2} />
+            <LiquidBlob color="purple" size={400} top="40%" left="40%" delay={4} />
 
             {/* Grid Pattern Overlay */}
             <div style={{ 
                 position: 'absolute', 
                 inset: 0, 
-                backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)',
+                backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px)',
                 backgroundSize: '50px 50px',
-                opacity: 0.3
+                opacity: 0.3,
+                pointerEvents: 'none'
             }} />
 
-            <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '100px' }}>
-                <div style={{ maxWidth: '800px' }}>
-                    <AnimatedSection>
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                    {/* Badge */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        style={{ textAlign: 'center', marginBottom: '24px' }}
+                    >
                         <span className="badge badge-light" style={{ 
-                            marginBottom: '24px',
-                            background: 'rgba(59,130,246,0.15)',
-                            border: '1px solid rgba(59,130,246,0.3)',
+                            background: 'rgba(212, 175, 55, 0.15)',
+                            border: '1px solid rgba(212, 175, 55, 0.3)',
                             backdropFilter: 'blur(10px)',
-                            padding: '8px 20px',
+                            padding: '8px 24px',
                             fontSize: '0.9rem',
-                            fontWeight: 600
+                            fontWeight: 600,
+                            color: '#F4E4B0'
                         }}>
-                            AI-Powered Business Automation
+                            Real Estate AI Automation
                         </span>
-                    </AnimatedSection>
-                    <AnimatedSection delay={0.1}>
-                        <h1 style={{ fontSize: 'clamp(2.8rem, 6vw, 4.5rem)', color: 'var(--white)', marginBottom: '28px', lineHeight: 1.1, fontWeight: 800 }}>
-                            Transform Leads Into{' '}
-                            <span style={{ background: 'linear-gradient(135deg, #60A5FA, #A78BFA, #10B981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                                Revenue
-                            </span>
-                            {' '}With AI
-                        </h1>
-                    </AnimatedSection>
-                    <AnimatedSection delay={0.2}>
-                        <p style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, marginBottom: '48px', maxWidth: '640px' }}>
-                            Arcanext builds intelligent automation systems powered by AI voice technology and automated workflows that capture, nurture, and convert leads 24/7 — while you focus on scaling your business.
-                        </p>
-                    </AnimatedSection>
-                    <AnimatedSection delay={0.3}>
-                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                            <Link 
-                                to="/contact"
-                                className="btn btn-primary btn-lg"
-                                style={{ 
-                                    padding: '18px 40px',
-                                    fontSize: '1.1rem',
-                                    boxShadow: '0 10px 40px rgba(59,130,246,0.4)',
-                                    transition: 'all 0.3s ease'
-                                }}
-                                onMouseEnter={e => {
-                                    e.target.style.transform = 'translateY(-3px)'
-                                    e.target.style.boxShadow = '0 15px 50px rgba(59,130,246,0.5)'
-                                }}
-                                onMouseLeave={e => {
-                                    e.target.style.transform = 'translateY(0)'
-                                    e.target.style.boxShadow = '0 10px 40px rgba(59,130,246,0.4)'
-                                }}
-                            >
-                                Book a Strategy Call →
-                            </Link>
-                            <Link to="/case-studies" className="btn btn-outline btn-lg" style={{ padding: '18px 40px', fontSize: '1.1rem' }}>
-                                View Case Studies
-                            </Link>
-                        </div>
-                    </AnimatedSection>
-                    <AnimatedSection delay={0.5}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '32px', marginTop: '56px', flexWrap: 'wrap' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                                <div style={{ 
-                                    width: 48, 
-                                    height: 48, 
-                                    borderRadius: '50%', 
-                                    background: 'linear-gradient(135deg, #F59E0B, #EF4444)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '1.5rem',
-                                    boxShadow: '0 8px 20px rgba(245,158,11,0.3)'
-                                }}>⭐</div>
-                                <div>
-                                    <div style={{ color: 'white', fontWeight: 700, fontSize: '1.05rem' }}>50+ Businesses Trust Us</div>
-                                    <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>4.9/5 average rating</div>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                                <div style={{ 
-                                    width: 48, 
-                                    height: 48, 
-                                    borderRadius: '50%', 
-                                    background: 'linear-gradient(135deg, #10B981, #059669)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '1.5rem',
-                                    boxShadow: '0 8px 20px rgba(16,185,129,0.3)'
-                                }}>🚀</div>
-                                <div>
-                                    <div style={{ color: 'white', fontWeight: 700, fontSize: '1.05rem' }}>2-Week Setup</div>
-                                    <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Go live fast</div>
-                                </div>
-                            </div>
-                        </div>
-                    </AnimatedSection>
+                    </motion.div>
+
+                    {/* Main Headline */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                        style={{ 
+                            fontSize: 'clamp(2.8rem, 6vw, 5rem)', 
+                            color: 'white', 
+                            marginBottom: '28px', 
+                            lineHeight: 1.1, 
+                            fontWeight: 800,
+                            textAlign: 'center',
+                            fontFamily: 'Poppins'
+                        }}
+                    >
+                        Convert Listings into{' '}
+                        <span style={{ 
+                            background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
+                            WebkitBackgroundClip: 'text', 
+                            WebkitTextFillColor: 'transparent' 
+                        }}>
+                            Revenue
+                        </span>
+                        {' '}with 24/7 AI Real Estate Teams
+                    </motion.h1>
+
+                    {/* Sub-headline */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
+                        style={{ 
+                            fontSize: '1.3rem', 
+                            color: 'rgba(255,255,255,0.85)', 
+                            lineHeight: 1.8, 
+                            marginBottom: '48px',
+                            textAlign: 'center',
+                            maxWidth: '800px',
+                            margin: '0 auto 48px'
+                        }}
+                    >
+                        Our AI voice and text agents engage your leads within 60 seconds, qualifying buyers and sellers before they ever reach your desk. Move from lead chasing to deal closing.
+                    </motion.p>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.3 }}
+                        style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
+                    >
+                        <Link 
+                            to="/contact"
+                            className="btn hw-accelerate"
+                            style={{ 
+                                padding: '20px 48px',
+                                fontSize: '1.1rem',
+                                fontWeight: 700,
+                                borderRadius: '9999px',
+                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
+                                color: '#0A1628',
+                                boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'inline-block'
+                            }}
+                            onMouseEnter={e => {
+                                e.target.style.transform = 'translateY(-3px)'
+                                e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
+                            }}
+                            onMouseLeave={e => {
+                                e.target.style.transform = 'translateY(0)'
+                                e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                            }}
+                        >
+                            Book a Strategy Call →
+                        </Link>
+                        <Link 
+                            to="/case-studies" 
+                            className="btn btn-outline btn-lg hw-accelerate" 
+                            style={{ 
+                                padding: '20px 48px', 
+                                fontSize: '1.1rem',
+                                background: 'rgba(255, 255, 255, 0.08)',
+                                backdropFilter: 'blur(12px)',
+                                border: '2px solid rgba(255, 255, 255, 0.2)',
+                                color: 'white'
+                            }}
+                        >
+                            View Case Studies
+                        </Link>
+                    </motion.div>
                 </div>
             </div>
-        </section>
+        </GlassSection>
     )
 }
 
-/* ===== SERVICES OVERVIEW ===== */
+/* ===== SERVICES WITH LIQUID GLASS ===== */
 function ServicesOverview() {
-    const serviceImages = [
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop', // Analytics dashboard
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop', // Charts/data
-        'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop', // Team collaboration
-        'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop', // Office workspace
-        'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop', // Technology
-    ]
-
     return (
-        <section className="section" style={{ background: 'var(--gray-50)' }}>
+        <section className="section" style={{ background: 'var(--slate-dark)', paddingTop: '100px', paddingBottom: '100px' }}>
             <div className="container">
                 <AnimatedSection>
                     <div className="section-header">
-                        <span className="badge badge-primary">Our Services</span>
-                        <h2>Everything You Need to Automate Growth</h2>
-                        <p>From lead capture to revenue tracking, we build the systems that power your business.</p>
+                        <span className="badge badge-light" style={{ 
+                            background: 'rgba(59, 130, 246, 0.15)', 
+                            border: '1px solid rgba(59, 130, 246, 0.3)',
+                            color: '#60A5FA'
+                        }}>Our Services</span>
+                        <h2 style={{ color: 'white' }}>Everything You Need to Automate Growth</h2>
+                        <p style={{ color: 'rgba(255,255,255,0.7)' }}>From lead capture to deal closing, we build AI systems that power your real estate business.</p>
                     </div>
                 </AnimatedSection>
-                <StaggerContainer className="grid-3" staggerDelay={0.12}>
+                <div className="grid-3" style={{ gap: '32px' }}>
                     {services.map((s, i) => (
-                        <StaggerItem key={i}>
-                            <div className="card" style={{ height: '100%', overflow: 'hidden', padding: 0 }}>
-                                <div style={{
-                                    width: '100%',
-                                    height: '240px',
-                                    overflow: 'hidden',
-                                    position: 'relative',
-                                }}>
-                                    <img src={serviceImages[i]} alt={s.title} style={{
+                        <LiquidGlassCard key={i} delay={i * 0.1} style={{ padding: 0, overflow: 'hidden' }}>
+                            <div style={{
+                                width: '100%',
+                                height: '220px',
+                                overflow: 'hidden',
+                                position: 'relative',
+                            }}>
+                                <motion.img 
+                                    src={s.image} 
+                                    alt={s.title}
+                                    whileHover={{ scale: 1.1 }}
+                                    transition={{ duration: 0.6 }}
+                                    style={{
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'cover',
-                                        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    }} onMouseEnter={e => {
-                                        e.target.style.transform = 'scale(1.15)'
-                                        e.target.style.filter = 'brightness(1.1)'
-                                    }}
-                                        onMouseLeave={e => {
-                                            e.target.style.transform = 'scale(1)'
-                                            e.target.style.filter = 'brightness(1)'
-                                        }} />
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        right: 0,
-                                        bottom: 0,
-                                        background: 'linear-gradient(135deg, rgba(30,58,138,0.5), rgba(37,99,235,0.3))',
-                                    }} />
-                                </div>
-                                <div style={{ padding: '24px' }}>
-                                    <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', color: 'var(--gray-900)' }}>{s.title}</h3>
-                                    <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem', lineHeight: 1.6 }}>{s.desc}</p>
-                                </div>
+                                    }} 
+                                />
+                                <div style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.6), rgba(212, 175, 55, 0.3))',
+                                }} />
                             </div>
-                        </StaggerItem>
+                            <div style={{ padding: '28px' }}>
+                                <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: 'white', fontWeight: 700 }}>{s.title}</h3>
+                                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', lineHeight: 1.6 }}>{s.desc}</p>
+                            </div>
+                        </LiquidGlassCard>
                     ))}
-                </StaggerContainer>
+                </div>
             </div>
         </section>
     )
@@ -235,29 +257,48 @@ function ServicesOverview() {
 /* ===== HOW IT WORKS ===== */
 function HowItWorks() {
     return (
-        <section className="section">
+        <section className="section" style={{ background: 'var(--slate-medium)' }}>
             <div className="container">
                 <AnimatedSection>
                     <div className="section-header">
-                        <span className="badge badge-primary">How It Works</span>
-                        <h2>Three Steps to Automated Growth</h2>
-                        <p>Our proven process delivers results in weeks, not months.</p>
+                        <span className="badge badge-light" style={{ 
+                            background: 'rgba(212, 175, 55, 0.15)', 
+                            border: '1px solid rgba(212, 175, 55, 0.3)',
+                            color: '#F4E4B0'
+                        }}>How It Works</span>
+                        <h2 style={{ color: 'white' }}>Three Steps to More Closed Deals</h2>
+                        <p style={{ color: 'rgba(255,255,255,0.7)' }}>Our AI automation system works around the clock to convert leads into appointments.</p>
                     </div>
                 </AnimatedSection>
                 <div className="grid-3">
                     {steps.map((s, i) => (
-                        <AnimatedSection key={i} delay={i * 0.15}>
-                            <div style={{ textAlign: 'center', padding: '20px' }}>
-                                <div style={{
-                                    width: 80, height: 80, borderRadius: '50%', margin: '0 auto 24px',
-                                    background: 'var(--gradient-card)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: 'white', fontWeight: 800, fontSize: '1.5rem', fontFamily: 'Poppins, sans-serif',
-                                }}>{s.num}</div>
-                                <h3 style={{ fontSize: '1.3rem', marginBottom: '12px' }}>{s.title}</h3>
-                                <p style={{ color: 'var(--gray-500)', lineHeight: 1.6 }}>{s.desc}</p>
-                                {i < 2 && <div style={{ display: 'none' }} className="step-arrow">→</div>}
-                            </div>
-                        </AnimatedSection>
+                        <LiquidGlassCard key={i} delay={i * 0.15} style={{ textAlign: 'center', padding: '40px 32px' }}>
+                            <motion.div 
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.15 + 0.2, duration: 0.4 }}
+                                style={{
+                                    width: 80, 
+                                    height: 80, 
+                                    borderRadius: '50%', 
+                                    margin: '0 auto 24px',
+                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center',
+                                    color: '#0A1628', 
+                                    fontWeight: 800, 
+                                    fontSize: '1.8rem', 
+                                    fontFamily: 'Poppins',
+                                    boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
+                                }}
+                            >
+                                {s.num}
+                            </motion.div>
+                            <h3 style={{ fontSize: '1.4rem', marginBottom: '12px', color: 'white', fontWeight: 700 }}>{s.title}</h3>
+                            <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, fontSize: '0.95rem' }}>{s.desc}</p>
+                        </LiquidGlassCard>
                     ))}
                 </div>
             </div>
@@ -265,151 +306,62 @@ function HowItWorks() {
     )
 }
 
-/* ===== INDUSTRIES ===== */
-function Industries() {
-    const industryImages = [
-        'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop', // Marketing team
-        'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop', // Real estate
-        'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop', // SaaS/tech
-        'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop', // Service business
-    ]
-
+/* ===== METRICS ===== */
+function Metrics() {
     return (
-        <section className="section" style={{ background: 'var(--gray-50)' }}>
+        <section className="section" style={{ background: 'var(--slate-dark)' }}>
             <div className="container">
                 <AnimatedSection>
-                    <div className="section-header">
-                        <span className="badge badge-primary">Industries</span>
-                        <h2>Built for Your Industry</h2>
-                        <p>Tailored automation solutions for the industries that need them most.</p>
-                    </div>
-                </AnimatedSection>
-                <StaggerContainer className="grid-4" staggerDelay={0.12}>
-                    {industries.map((ind, i) => (
-                        <StaggerItem key={i}>
-                            <div className="card" style={{ textAlign: 'center', height: '100%', overflow: 'hidden', padding: 0 }}>
-                                <div style={{
-                                    width: '100%',
-                                    height: '200px',
-                                    overflow: 'hidden',
-                                    position: 'relative',
-                                }}>
-                                    <img src={industryImages[i]} alt={ind.title} style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    }} onMouseEnter={e => {
-                                        e.target.style.transform = 'scale(1.15)'
-                                        e.target.style.filter = 'brightness(1.1)'
-                                    }}
-                                        onMouseLeave={e => {
-                                            e.target.style.transform = 'scale(1)'
-                                            e.target.style.filter = 'brightness(1)'
-                                        }} />
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        right: 0,
-                                        bottom: 0,
-                                        background: 'linear-gradient(135deg, rgba(30,58,138,0.6), rgba(37,99,235,0.4))',
-                                    }} />
-                                </div>
-                                <div style={{ padding: '24px' }}>
-                                    <h3 style={{ fontSize: '1.1rem', marginBottom: '10px' }}>{ind.title}</h3>
-                                    <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.6 }}>{ind.desc}</p>
-                                </div>
-                            </div>
-                        </StaggerItem>
-                    ))}
-                </StaggerContainer>
-            </div>
-        </section>
-    )
-}
-
-/* ===== CASE STUDY PREVIEW ===== */
-function CaseStudyPreview() {
-    return (
-        <section className="section" style={{ background: 'var(--gradient-hero)', color: 'white' }}>
-            <div className="container">
-                <AnimatedSection>
-                    <div className="section-header" style={{ marginBottom: '48px' }}>
-                        <span className="badge badge-light">Proven Results</span>
+                    <div className="section-header" style={{ marginBottom: '56px' }}>
+                        <span className="badge badge-light" style={{ 
+                            background: 'rgba(59, 130, 246, 0.15)', 
+                            border: '1px solid rgba(59, 130, 246, 0.3)',
+                            color: '#60A5FA'
+                        }}>Proven Results</span>
                         <h2 style={{ color: 'white' }}>Real Impact. Real Numbers.</h2>
-                        <p style={{ color: 'rgba(255,255,255,0.6)' }}>See the measurable results our automation systems deliver for businesses like yours.</p>
+                        <p style={{ color: 'rgba(255,255,255,0.7)' }}>See the measurable results our AI automation delivers for real estate teams.</p>
                     </div>
                 </AnimatedSection>
-                <StaggerContainer className="grid-4" staggerDelay={0.12}>
+                <div className="grid-4">
                     {metrics.map((m, i) => (
-                        <StaggerItem key={i}>
-                            <div className="card-glass" style={{ textAlign: 'center' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '8px', fontFamily: 'Poppins, sans-serif' }}>{m.value}</div>
-                                <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>{m.label}</div>
-                            </div>
-                        </StaggerItem>
+                        <LiquidGlassCard key={i} delay={i * 0.1} style={{ textAlign: 'center', padding: '40px 24px' }}>
+                            <motion.div 
+                                initial={{ scale: 0.5, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 + 0.2, duration: 0.4 }}
+                                style={{ 
+                                    fontSize: '3rem', 
+                                    fontWeight: 800, 
+                                    marginBottom: '8px', 
+                                    fontFamily: 'Poppins',
+                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent'
+                                }}
+                            >
+                                {m.value}
+                            </motion.div>
+                            <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', fontWeight: 500 }}>{m.label}</div>
+                        </LiquidGlassCard>
                     ))}
-                </StaggerContainer>
-                <AnimatedSection delay={0.3}>
-                    <div style={{ textAlign: 'center', marginTop: '48px' }}>
-                        <Link to="/case-studies" className="btn btn-outline btn-lg">View All Case Studies →</Link>
+                </div>
+                <AnimatedSection delay={0.5}>
+                    <div style={{ textAlign: 'center', marginTop: '56px' }}>
+                        <Link 
+                            to="/case-studies" 
+                            className="btn btn-outline btn-lg hw-accelerate"
+                            style={{
+                                background: 'rgba(255, 255, 255, 0.08)',
+                                backdropFilter: 'blur(12px)',
+                                border: '2px solid rgba(255, 255, 255, 0.2)',
+                                color: 'white'
+                            }}
+                        >
+                            View All Case Studies →
+                        </Link>
                     </div>
                 </AnimatedSection>
-            </div>
-        </section>
-    )
-}
-
-/* ===== PRICING PREVIEW ===== */
-function PricingPreview() {
-    return (
-        <section className="section">
-            <div className="container">
-                <AnimatedSection>
-                    <div className="section-header">
-                        <span className="badge badge-primary">Pricing</span>
-                        <h2>Simple, Transparent Pricing</h2>
-                        <p>Choose the plan that fits your business. No hidden fees. Cancel anytime.</p>
-                    </div>
-                </AnimatedSection>
-                <StaggerContainer className="grid-3" staggerDelay={0.12}>
-                    {pricingPlans.map((plan, i) => (
-                        <StaggerItem key={i}>
-                            <div className="card" style={{
-                                position: 'relative', textAlign: 'center', height: '100%',
-                                border: plan.popular ? '2px solid var(--primary)' : undefined,
-                                boxShadow: plan.popular ? 'var(--shadow-glow)' : undefined,
-                            }}>
-                                {plan.popular && (
-                                    <div style={{
-                                        position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)',
-                                        background: 'var(--gradient-card)', color: 'white', padding: '4px 20px',
-                                        borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 600,
-                                    }}>Most Popular</div>
-                                )}
-                                <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', marginTop: plan.popular ? '8px' : 0 }}>{plan.name}</h3>
-                                <div style={{ marginBottom: '8px' }}>
-                                    <span style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary)' }}>{plan.monthly}</span>
-                                    {plan.monthly !== 'Custom' && <span style={{ color: 'var(--gray-500)' }}>/mo</span>}
-                                </div>
-                                <div style={{ fontSize: '0.85rem', color: 'var(--gray-400)', marginBottom: '24px' }}>
-                                    {plan.setup !== 'Custom' ? `${plan.setup} setup fee` : 'Custom setup'}
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', textAlign: 'left' }}>
-                                    {plan.features.map((f, j) => (
-                                        <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                                            <span style={{ color: 'var(--primary)', fontWeight: 700 }}>✓</span> {f}
-                                        </div>
-                                    ))}
-                                </div>
-                                <Link to="/pricing" className={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`} style={{ width: '100%' }}>
-                                    {plan.name === 'Scale' ? 'Contact Us' : 'Get Started'}
-                                </Link>
-                            </div>
-                        </StaggerItem>
-                    ))}
-                </StaggerContainer>
             </div>
         </section>
     )
@@ -418,22 +370,81 @@ function PricingPreview() {
 /* ===== FINAL CTA ===== */
 function FinalCTA() {
     return (
-        <section style={{ background: 'var(--gray-900)', padding: '100px 0' }}>
-            <div className="container" style={{ textAlign: 'center' }}>
+        <GlassSection style={{ 
+            background: 'linear-gradient(135deg, #0A1628 0%, #1E293B 100%)', 
+            padding: '120px 0',
+            position: 'relative'
+        }}>
+            <LiquidBlob color="gold" size={500} top="20%" right="10%" delay={0} />
+            <LiquidBlob color="blue" size={400} bottom="20%" left="10%" delay={2} />
+            
+            <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
                 <AnimatedSection>
-                    <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'white', marginBottom: '20px' }}>
-                        Ready to Automate Your Growth?
+                    <h2 style={{ 
+                        fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', 
+                        color: 'white', 
+                        marginBottom: '24px',
+                        fontWeight: 800,
+                        fontFamily: 'Poppins'
+                    }}>
+                        Ready to Close More Deals?
                     </h2>
-                    <p style={{ fontSize: '1.1rem', color: 'var(--gray-400)', marginBottom: '40px', maxWidth: '500px', margin: '0 auto 40px' }}>
-                        Join 50+ businesses already using Arcanext to capture more leads and close more deals.
+                    <p style={{ 
+                        fontSize: '1.2rem', 
+                        color: 'rgba(255,255,255,0.8)', 
+                        marginBottom: '48px', 
+                        maxWidth: '600px', 
+                        margin: '0 auto 48px',
+                        lineHeight: 1.7
+                    }}>
+                        Join top-performing real estate teams using AI automation to convert more leads and book more showings.
                     </p>
-                    <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                        <Link to="/contact" className="btn btn-primary btn-lg">Book a Strategy Call</Link>
-                        <Link to="/services" className="btn btn-outline btn-lg">Explore Services →</Link>
+                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <Link 
+                            to="/contact" 
+                            className="btn hw-accelerate"
+                            style={{
+                                padding: '20px 48px',
+                                fontSize: '1.1rem',
+                                fontWeight: 700,
+                                borderRadius: '9999px',
+                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
+                                color: '#0A1628',
+                                boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'inline-block'
+                            }}
+                            onMouseEnter={e => {
+                                e.target.style.transform = 'translateY(-3px)'
+                                e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
+                            }}
+                            onMouseLeave={e => {
+                                e.target.style.transform = 'translateY(0)'
+                                e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                            }}
+                        >
+                            Book a Strategy Call
+                        </Link>
+                        <Link 
+                            to="/pricing" 
+                            className="btn btn-outline btn-lg hw-accelerate"
+                            style={{
+                                padding: '20px 48px',
+                                fontSize: '1.1rem',
+                                background: 'rgba(255, 255, 255, 0.08)',
+                                backdropFilter: 'blur(12px)',
+                                border: '2px solid rgba(255, 255, 255, 0.2)',
+                                color: 'white'
+                            }}
+                        >
+                            View Pricing →
+                        </Link>
                     </div>
                 </AnimatedSection>
             </div>
-        </section>
+        </GlassSection>
     )
 }
 
@@ -444,9 +455,7 @@ export default function Home() {
             <Hero />
             <ServicesOverview />
             <HowItWorks />
-            <Industries />
-            <CaseStudyPreview />
-            <PricingPreview />
+            <Metrics />
             <FinalCTA />
         </>
     )
