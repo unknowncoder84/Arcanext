@@ -77,120 +77,118 @@ function Hero() {
             }} />
 
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-                    {/* Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4 }}
-                        style={{ textAlign: 'center', marginBottom: '24px' }}
-                    >
-                        <span className="badge badge-light" style={{ 
-                            background: 'rgba(212, 175, 55, 0.15)',
-                            border: '1px solid rgba(212, 175, 55, 0.3)',
-                            backdropFilter: 'blur(10px)',
-                            padding: '8px 24px',
-                            fontSize: '0.9rem',
-                            fontWeight: 600,
-                            color: '#F4E4B0'
-                        }}>
-                            Real Estate AI Automation
-                        </span>
-                    </motion.div>
+                <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+                    <div style={{ maxWidth: '700px' }}>
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                            style={{ marginBottom: '24px' }}
+                        >
+                            <span className="badge badge-light" style={{ 
+                                background: 'rgba(212, 175, 55, 0.15)',
+                                border: '1px solid rgba(212, 175, 55, 0.3)',
+                                backdropFilter: 'blur(10px)',
+                                padding: '8px 24px',
+                                fontSize: '0.9rem',
+                                fontWeight: 600,
+                                color: '#F4E4B0'
+                            }}>
+                                Built for High-Performance Real Estate Teams
+                            </span>
+                        </motion.div>
 
-                    {/* Main Headline */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                        style={{ 
-                            fontSize: 'clamp(2.8rem, 6vw, 5rem)', 
-                            color: 'white', 
-                            marginBottom: '28px', 
-                            lineHeight: 1.1, 
-                            fontWeight: 800,
-                            textAlign: 'center',
-                            fontFamily: 'Poppins'
-                        }}
-                    >
-                        Convert Listings into{' '}
-                        <span style={{ 
-                            background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
-                            WebkitBackgroundClip: 'text', 
-                            WebkitTextFillColor: 'transparent' 
-                        }}>
-                            Revenue
-                        </span>
-                        {' '}with 24/7 AI Real Estate Teams
-                    </motion.h1>
-
-                    {/* Sub-headline */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
-                        style={{ 
-                            fontSize: '1.3rem', 
-                            color: 'rgba(255,255,255,0.85)', 
-                            lineHeight: 1.8, 
-                            marginBottom: '48px',
-                            textAlign: 'center',
-                            maxWidth: '800px',
-                            margin: '0 auto 48px'
-                        }}
-                    >
-                        Our AI voice and text agents engage your leads within 60 seconds, qualifying buyers and sellers before they ever reach your desk. Move from lead chasing to deal closing.
-                    </motion.p>
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.3 }}
-                        style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
-                    >
-                        <Link 
-                            to="/contact"
-                            className="btn hw-accelerate"
+                        {/* Main Headline */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
                             style={{ 
-                                padding: '20px 48px',
-                                fontSize: '1.1rem',
-                                fontWeight: 700,
-                                borderRadius: '9999px',
-                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
-                                color: '#0A1628',
-                                boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
-                                transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
-                                border: 'none',
-                                cursor: 'pointer',
-                                display: 'inline-block'
-                            }}
-                            onMouseEnter={e => {
-                                e.target.style.transform = 'translateY(-3px)'
-                                e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
-                            }}
-                            onMouseLeave={e => {
-                                e.target.style.transform = 'translateY(0)'
-                                e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                                fontSize: 'clamp(2.8rem, 6vw, 4.5rem)', 
+                                color: 'white', 
+                                marginBottom: '28px', 
+                                lineHeight: 1.1, 
+                                fontWeight: 800,
+                                fontFamily: 'Poppins'
                             }}
                         >
-                            Book a Strategy Call →
-                        </Link>
-                        <Link 
-                            to="/case-studies" 
-                            className="btn btn-outline btn-lg hw-accelerate" 
+                            Stop Losing Hot Buyer Inquiries.{' '}
+                            <span style={{ 
+                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
+                                WebkitBackgroundClip: 'text', 
+                                WebkitTextFillColor: 'transparent' 
+                            }}>
+                                Respond in Under 60 Seconds
+                            </span>
+                            {' '}— Automatically.
+                        </motion.h1>
+
+                        {/* Sub-headline */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, delay: 0.2 }}
                             style={{ 
-                                padding: '20px 48px', 
-                                fontSize: '1.1rem',
-                                background: 'rgba(255, 255, 255, 0.08)',
-                                backdropFilter: 'blur(12px)',
-                                border: '2px solid rgba(255, 255, 255, 0.2)',
-                                color: 'white'
+                                fontSize: '1.25rem', 
+                                color: 'rgba(255,255,255,0.85)', 
+                                lineHeight: 1.8, 
+                                marginBottom: '48px'
                             }}
                         >
-                            View Case Studies
-                        </Link>
-                    </motion.div>
+                            We help real estate teams recover missed calls, respond instantly to website and portal leads, and book more appointments without hiring more agents.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, delay: 0.3 }}
+                            style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}
+                        >
+                            <Link 
+                                to="/contact"
+                                className="btn hw-accelerate"
+                                style={{ 
+                                    padding: '20px 48px',
+                                    fontSize: '1.1rem',
+                                    fontWeight: 700,
+                                    borderRadius: '9999px',
+                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
+                                    color: '#0A1628',
+                                    boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                    transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    display: 'inline-block'
+                                }}
+                                onMouseEnter={e => {
+                                    e.target.style.transform = 'translateY(-3px)'
+                                    e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
+                                }}
+                                onMouseLeave={e => {
+                                    e.target.style.transform = 'translateY(0)'
+                                    e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                                }}
+                            >
+                                Book a Strategy Call →
+                            </Link>
+                            <Link 
+                                to="/case-studies" 
+                                className="btn btn-outline btn-lg hw-accelerate" 
+                                style={{ 
+                                    padding: '20px 48px', 
+                                    fontSize: '1.1rem',
+                                    background: 'rgba(255, 255, 255, 0.08)',
+                                    backdropFilter: 'blur(12px)',
+                                    border: '2px solid rgba(255, 255, 255, 0.2)',
+                                    color: 'white'
+                                }}
+                            >
+                                View Case Studies
+                            </Link>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
         </GlassSection>
