@@ -131,7 +131,7 @@ function Hero() {
                                 marginBottom: '48px'
                             }}
                         >
-                            We help real estate teams recover missed calls, respond instantly to website and portal leads, and book more appointments without hiring more agents.
+                            From missed calls and website forms to portal leads and WhatsApp messages — we engage, qualify, and book appointments instantly so your agents only handle serious prospects.
                         </motion.p>
 
                         {/* CTA Buttons */}
