@@ -137,6 +137,8 @@ export function GlassSection({ children, className = '', ...props }) {
       style={{
         position: 'relative',
         overflow: 'hidden',
+        width: '100%',
+        maxWidth: '100vw',
         ...props.style
       }}
       {...props}

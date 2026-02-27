@@ -55,6 +55,9 @@ function Hero() {
             alignItems: 'center',
             paddingTop: '140px',
             paddingBottom: '80px',
+            width: '100%',
+            maxWidth: '100vw',
+            overflowX: 'hidden'
         }}>
             {/* Animated Liquid Blobs */}
             <LiquidBlob color="blue" size={600} top="5%" right="5%" delay={0} />
@@ -71,9 +74,9 @@ function Hero() {
                 pointerEvents: 'none'
             }} />
 
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                    <div style={{ maxWidth: '700px', padding: '0 16px' }}>
+            <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+                <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
+                    <div style={{ maxWidth: '700px', width: '100%' }}>
                         {/* Badge */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
