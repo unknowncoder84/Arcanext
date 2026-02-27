@@ -7,27 +7,38 @@ export default function Logo({ size = 36, color = 'white' }) {
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
         >
-            {/* Geometric pattern based on the provided design */}
-            <circle cx="50" cy="50" r="48" fill="currentColor" opacity="0.1" />
+            {/* Background circle with subtle fill */}
+            <circle cx="50" cy="50" r="46" fill={color} opacity="0.08" />
             
-            {/* Top pyramid */}
-            <path d="M50 10 L85 45 L50 45 L15 45 Z" stroke={color} strokeWidth="1.5" fill="none" />
-            <path d="M50 10 L67.5 27.5 L50 27.5 L32.5 27.5 Z" stroke={color} strokeWidth="1.5" fill="none" />
+            {/* Outer circle border */}
+            <circle cx="50" cy="50" r="46" stroke={color} strokeWidth="2" fill="none" />
+            
+            {/* Top triangle/pyramid */}
+            <path d="M50 15 L75 40 L50 40 L25 40 Z" stroke={color} strokeWidth="2" fill="none" />
+            
+            {/* Inner top triangle */}
+            <path d="M50 15 L62.5 27.5 L50 27.5 L37.5 27.5 Z" stroke={color} strokeWidth="2" fill="none" />
             
             {/* Center diamond */}
-            <path d="M50 45 L67.5 62.5 L50 80 L32.5 62.5 Z" stroke={color} strokeWidth="1.5" fill="none" />
-            <path d="M32.5 62.5 L50 62.5 L67.5 62.5" stroke={color} strokeWidth="1.5" />
-            <path d="M50 45 L50 80" stroke={color} strokeWidth="1.5" />
+            <path d="M50 40 L65 55 L50 70 L35 55 Z" stroke={color} strokeWidth="2" fill="none" />
             
-            {/* Bottom pyramid (inverted) */}
-            <path d="M15 55 L50 55 L85 55 L50 90 Z" stroke={color} strokeWidth="1.5" fill="none" />
-            <path d="M32.5 72.5 L50 72.5 L67.5 72.5 L50 90 Z" stroke={color} strokeWidth="1.5" fill="none" />
+            {/* Horizontal center line */}
+            <path d="M35 55 L65 55" stroke={color} strokeWidth="2" />
             
-            {/* Connecting lines */}
-            <path d="M15 45 L15 55" stroke={color} strokeWidth="1.5" />
-            <path d="M85 45 L85 55" stroke={color} strokeWidth="1.5" />
-            <path d="M32.5 27.5 L32.5 62.5" stroke={color} strokeWidth="1.5" />
-            <path d="M67.5 27.5 L67.5 62.5" stroke={color} strokeWidth="1.5" />
+            {/* Vertical center line */}
+            <path d="M50 40 L50 70" stroke={color} strokeWidth="2" />
+            
+            {/* Bottom inverted triangle */}
+            <path d="M25 60 L50 60 L75 60 L50 85 Z" stroke={color} strokeWidth="2" fill="none" />
+            
+            {/* Inner bottom triangle */}
+            <path d="M37.5 72.5 L50 72.5 L62.5 72.5 L50 85 Z" stroke={color} strokeWidth="2" fill="none" />
+            
+            {/* Vertical connecting lines */}
+            <path d="M25 40 L25 60" stroke={color} strokeWidth="2" />
+            <path d="M75 40 L75 60" stroke={color} strokeWidth="2" />
+            <path d="M37.5 27.5 L35 55" stroke={color} strokeWidth="1.5" />
+            <path d="M62.5 27.5 L65 55" stroke={color} strokeWidth="1.5" />
         </svg>
     )
 }

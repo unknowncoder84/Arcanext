@@ -45,24 +45,25 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{
-                        width: 40,
-                        height: 40,
+                        width: 42,
+                        height: 42,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         transition: 'var(--transition)',
                     }}>
                         <Logo 
-                            size={40} 
+                            size={42} 
                             color={scrolled ? '#1E3A8A' : '#FFFFFF'} 
                         />
                     </div>
                     <span style={{
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 700,
-                        fontSize: '1.3rem',
+                        fontSize: '1.4rem',
                         color: scrolled ? 'var(--gray-900)' : 'var(--white)',
                         transition: 'var(--transition)',
+                        letterSpacing: '-0.02em'
                     }}>Arcanext</span>
                 </Link>
 
