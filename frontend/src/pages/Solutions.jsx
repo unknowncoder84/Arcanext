@@ -104,7 +104,7 @@ export default function Solutions() {
     return (
         <>
             {/* Hero */}
-            <section style={{
+            <section className="hero-section" style={{
                 background: 'var(--gradient-hero)', paddingTop: '160px', paddingBottom: '100px',
                 position: 'relative', overflow: 'hidden',
             }}>
@@ -115,10 +115,10 @@ export default function Solutions() {
                 <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <AnimatedSection>
                         <span className="badge badge-light" style={{ marginBottom: '16px' }}>Solutions</span>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px' }}>
+                        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px', lineHeight: 1.2 }}>
                             Industry-Specific <span style={{ background: 'linear-gradient(135deg,#60A5FA,#A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Solutions</span>
                         </h1>
-                        <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>
+                        <p style={{ fontSize: 'clamp(1rem, 3vw, 1.15rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>
                             Tailored automation strategies designed for the unique challenges of your industry
                         </p>
                     </AnimatedSection>
@@ -132,7 +132,7 @@ export default function Solutions() {
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }} className="grid-2">
                             {/* Image */}
                             <AnimatedSection variant={index % 2 === 0 ? 'fadeLeft' : 'fadeRight'} style={{ order: index % 2 === 0 ? 1 : 2 }}>
-                                <div style={{
+                                <div className="solution-image" style={{
                                     borderRadius: 'var(--radius-xl)',
                                     overflow: 'hidden',
                                     boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
@@ -183,15 +183,15 @@ export default function Solutions() {
                             {/* Content */}
                             <AnimatedSection variant={index % 2 === 0 ? 'fadeRight' : 'fadeLeft'} style={{ order: index % 2 === 0 ? 2 : 1 }}>
                                 <div>
-                                    <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>{solution.title}</h2>
-                                    <p style={{ color: 'var(--gray-500)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '32px' }}>
+                                    <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '16px', lineHeight: 1.3 }}>{solution.title}</h2>
+                                    <p style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.7, marginBottom: '32px' }}>
                                         {solution.desc}
                                     </p>
 
-                                    <h3 style={{ fontSize: '1.1rem', marginBottom: '20px', fontWeight: 600 }}>Key Features:</h3>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
+                                    <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', marginBottom: '20px', fontWeight: 600 }}>Key Features:</h3>
+                                    <div className="feature-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
                                         {solution.features.map((f, i) => (
-                                            <div key={i} style={{
+                                            <div key={i} className="feature-item" style={{
                                                 display: 'flex',
                                                 alignItems: 'flex-start',
                                                 gap: '12px',
@@ -200,7 +200,7 @@ export default function Solutions() {
                                                 borderRadius: 'var(--radius-md)',
                                                 border: '1px solid var(--gray-200)',
                                             }}>
-                                                <div style={{
+                                                <div className="feature-icon" style={{
                                                     width: 40,
                                                     height: 40,
                                                     borderRadius: 'var(--radius-sm)',
@@ -215,8 +215,8 @@ export default function Solutions() {
                                                     {f.icon}
                                                 </div>
                                                 <div>
-                                                    <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: '0.95rem' }}>{f.title}</div>
-                                                    <div style={{ color: 'var(--gray-500)', fontSize: '0.85rem', lineHeight: 1.5 }}>{f.desc}</div>
+                                                    <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>{f.title}</div>
+                                                    <div style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.8rem, 2vw, 0.85rem)', lineHeight: 1.5 }}>{f.desc}</div>
                                                 </div>
                                             </div>
                                         ))}
@@ -230,11 +230,11 @@ export default function Solutions() {
                             <div style={{
                                 background: index % 2 === 0 ? 'var(--gray-50)' : 'white',
                                 borderRadius: 'var(--radius-xl)',
-                                padding: '48px',
+                                padding: 'clamp(24px, 5vw, 48px)',
                                 marginTop: '48px',
                                 border: '1px solid var(--gray-200)',
                             }}>
-                                <h3 style={{ fontSize: '1.3rem', textAlign: 'center', marginBottom: '40px' }}>Automated Workflow</h3>
+                                <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', textAlign: 'center', marginBottom: '40px' }}>Automated Workflow</h3>
                                 <div style={{
                                     display: 'grid',
                                     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -243,15 +243,15 @@ export default function Solutions() {
                                     {solution.workflow.map((w, i) => (
                                         <div key={i} style={{ textAlign: 'center' }}>
                                             <div style={{
-                                                width: 60,
-                                                height: 60,
+                                                width: 'clamp(50px, 10vw, 60px)',
+                                                height: 'clamp(50px, 10vw, 60px)',
                                                 borderRadius: '50%',
                                                 background: 'var(--gradient-card)',
                                                 color: 'white',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                fontSize: '1.5rem',
+                                                fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
                                                 fontWeight: 800,
                                                 fontFamily: 'Poppins',
                                                 margin: '0 auto 16px',
@@ -259,8 +259,8 @@ export default function Solutions() {
                                             }}>
                                                 {w.step}
                                             </div>
-                                            <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: '0.95rem' }}>{w.title}</div>
-                                            <div style={{ color: 'var(--gray-500)', fontSize: '0.8rem' }}>{w.desc}</div>
+                                            <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>{w.title}</div>
+                                            <div style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.75rem, 1.8vw, 0.8rem)' }}>{w.desc}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -270,8 +270,8 @@ export default function Solutions() {
                         {/* Stats */}
                         <AnimatedSection delay={0.3}>
                             <div style={{ marginTop: '48px' }}>
-                                <h3 style={{ fontSize: '1.3rem', textAlign: 'center', marginBottom: '32px' }}>Why Choose This Solution?</h3>
-                                <div style={{
+                                <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', textAlign: 'center', marginBottom: '32px' }}>Why Choose This Solution?</h3>
+                                <div className="stats-grid" style={{
                                     display: 'grid',
                                     gridTemplateColumns: 'repeat(4, 1fr)',
                                     gap: '20px',
@@ -279,14 +279,14 @@ export default function Solutions() {
                                     {solution.stats.map((stat, i) => (
                                         <div key={i} style={{
                                             background: 'white',
-                                            padding: '28px 20px',
+                                            padding: 'clamp(20px, 4vw, 28px)',
                                             borderRadius: 'var(--radius-lg)',
                                             textAlign: 'center',
                                             border: '1px solid var(--gray-200)',
                                             boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
                                         }}>
-                                            <div style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins', marginBottom: '8px' }}>{stat.value}</div>
-                                            <div style={{ color: 'var(--gray-600)', fontSize: '0.85rem' }}>{stat.label}</div>
+                                            <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins', marginBottom: '8px' }}>{stat.value}</div>
+                                            <div style={{ color: 'var(--gray-600)', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)' }}>{stat.label}</div>
                                         </div>
                                     ))}
                                 </div>

@@ -49,15 +49,15 @@ const caseStudies = [
 export default function CaseStudies() {
     return (
         <>
-            <section style={{ background: 'var(--gradient-hero)', paddingTop: '160px', paddingBottom: '100px', position: 'relative', overflow: 'hidden' }}>
+            <section className="hero-section" style={{ background: 'var(--gradient-hero)', paddingTop: '160px', paddingBottom: '100px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '15%', right: '8%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(37,99,235,0.2), transparent 70%)' }} />
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <AnimatedSection>
                         <span className="badge badge-light" style={{ marginBottom: '16px' }}>Case Studies</span>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px', maxWidth: 650 }}>
+                        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px', maxWidth: 650, lineHeight: 1.2 }}>
                             Real Results for <span style={{ background: 'linear-gradient(135deg,#60A5FA,#A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Real Businesses</span>
                         </h1>
-                        <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', maxWidth: 520, lineHeight: 1.7 }}>See how Arcanext has helped businesses automate growth and achieve measurable results.</p>
+                        <p style={{ fontSize: 'clamp(1rem, 3vw, 1.15rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 520, lineHeight: 1.7 }}>See how Arcanext has helped businesses automate growth and achieve measurable results.</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -66,17 +66,17 @@ export default function CaseStudies() {
                 <section key={i} className="section" style={{ background: i % 2 === 0 ? 'var(--white)' : 'var(--gray-50)' }}>
                     <div className="container">
                         <AnimatedSection>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
-                                <div style={{ width: 60, height: 60, borderRadius: 'var(--radius-md)', background: `${cs.color}10`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem' }}>{cs.logo}</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px', flexWrap: 'wrap' }}>
+                                <div style={{ width: 'clamp(50px, 10vw, 60px)', height: 'clamp(50px, 10vw, 60px)', borderRadius: 'var(--radius-md)', background: `${cs.color}10`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'clamp(1.5rem, 3vw, 1.8rem)' }}>{cs.logo}</div>
                                 <div>
-                                    <h2 style={{ fontSize: '1.8rem', marginBottom: '4px' }}>{cs.company}</h2>
+                                    <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '4px', lineHeight: 1.3 }}>{cs.company}</h2>
                                     <span className="badge badge-primary">{cs.industry}</span>
                                 </div>
                             </div>
                         </AnimatedSection>
 
                         <AnimatedSection variant="scaleUp" delay={0.1}>
-                            <div style={{
+                            <div className="case-study-image" style={{
                                 width: '100%',
                                 height: '400px',
                                 borderRadius: 'var(--radius-xl)',
@@ -109,41 +109,41 @@ export default function CaseStudies() {
                             </div>
                         </AnimatedSection>
 
-                        <div className="grid-2" style={{ marginBottom: '48px' }}>
+                        <div className="grid-2" style={{ marginBottom: '48px', gap: '24px' }}>
                             <AnimatedSection variant="fadeLeft">
-                                <div className="card" style={{ height: '100%', borderLeft: '4px solid var(--gray-300)' }}>
-                                    <h3 style={{ fontSize: '1rem', color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>The Problem</h3>
-                                    <p style={{ color: 'var(--gray-600)', lineHeight: 1.7 }}>{cs.problem}</p>
+                                <div className="card" style={{ height: '100%', borderLeft: '4px solid var(--gray-300)', padding: 'clamp(20px, 4vw, 32px)' }}>
+                                    <h3 style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>The Problem</h3>
+                                    <p style={{ color: 'var(--gray-600)', lineHeight: 1.7, fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{cs.problem}</p>
                                 </div>
                             </AnimatedSection>
                             <AnimatedSection variant="fadeRight">
-                                <div className="card" style={{ height: '100%', borderLeft: `4px solid ${cs.color}` }}>
-                                    <h3 style={{ fontSize: '1rem', color: cs.color, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>The Solution</h3>
-                                    <p style={{ color: 'var(--gray-600)', lineHeight: 1.7 }}>{cs.solution}</p>
+                                <div className="card" style={{ height: '100%', borderLeft: `4px solid ${cs.color}`, padding: 'clamp(20px, 4vw, 32px)' }}>
+                                    <h3 style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', color: cs.color, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>The Solution</h3>
+                                    <p style={{ color: 'var(--gray-600)', lineHeight: 1.7, fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{cs.solution}</p>
                                 </div>
                             </AnimatedSection>
                         </div>
 
-                        <StaggerContainer className="grid-4" staggerDelay={0.12}>
+                        <StaggerContainer className="grid-4 stats-grid" staggerDelay={0.12} style={{ gap: '20px' }}>
                             {cs.results.map((r, j) => (
                                 <StaggerItem key={j}>
-                                    <div className="card" style={{ textAlign: 'center', borderTop: `3px solid ${cs.color}` }}>
-                                        <div style={{ fontSize: '2.2rem', fontWeight: 800, color: cs.color, fontFamily: 'Poppins', marginBottom: '8px' }}>{r.value}</div>
-                                        <div style={{ color: 'var(--gray-500)', fontSize: '0.85rem' }}>{r.label}</div>
+                                    <div className="card" style={{ textAlign: 'center', borderTop: `3px solid ${cs.color}`, padding: 'clamp(20px, 4vw, 32px)' }}>
+                                        <div style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 800, color: cs.color, fontFamily: 'Poppins', marginBottom: '8px' }}>{r.value}</div>
+                                        <div style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)' }}>{r.label}</div>
                                     </div>
                                 </StaggerItem>
                             ))}
                         </StaggerContainer>
 
                         <AnimatedSection delay={0.2}>
-                            <div style={{ background: `${cs.color}08`, border: `1px solid ${cs.color}15`, borderRadius: 'var(--radius-xl)', padding: '40px', marginTop: '48px', position: 'relative' }}>
-                                <div style={{ fontSize: '3rem', color: cs.color, opacity: 0.3, position: 'absolute', top: 16, left: 24 }}>"</div>
-                                <p style={{ fontSize: '1.1rem', color: 'var(--gray-700)', lineHeight: 1.8, fontStyle: 'italic', marginBottom: '20px', paddingLeft: 16 }}>{cs.quote}</p>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingLeft: 16 }}>
+                            <div className="testimonial-quote" style={{ background: `${cs.color}08`, border: `1px solid ${cs.color}15`, borderRadius: 'var(--radius-xl)', padding: 'clamp(24px, 5vw, 40px)', marginTop: '48px', position: 'relative' }}>
+                                <div style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: cs.color, opacity: 0.3, position: 'absolute', top: 16, left: 24 }}>"</div>
+                                <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', color: 'var(--gray-700)', lineHeight: 1.8, fontStyle: 'italic', marginBottom: '20px', paddingLeft: 16 }}>{cs.quote}</p>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingLeft: 16, flexWrap: 'wrap' }}>
                                     <div style={{ width: 44, height: 44, borderRadius: '50%', background: `${cs.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: cs.color, fontWeight: 700 }}>{cs.author[0]}</div>
                                     <div>
-                                        <div style={{ fontWeight: 600 }}>{cs.author}</div>
-                                        <div style={{ color: 'var(--gray-500)', fontSize: '0.85rem' }}>{cs.role}</div>
+                                        <div style={{ fontWeight: 600, fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{cs.author}</div>
+                                        <div style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.8rem, 1.8vw, 0.85rem)' }}>{cs.role}</div>
                                     </div>
                                 </div>
                             </div>

@@ -48,7 +48,7 @@ const metrics = [
 /* ===== HERO WITH LIQUID GLASS ===== */
 function Hero() {
     return (
-        <GlassSection style={{
+        <GlassSection className="hero-section" style={{
             background: 'linear-gradient(135deg, #0A1628 0%, #1E293B 50%, #2D1B69 100%)',
             minHeight: '100vh',
             display: 'flex',
@@ -57,8 +57,29 @@ function Hero() {
             paddingBottom: '80px',
             width: '100%',
             maxWidth: '100vw',
-            overflowX: 'hidden'
+            overflowX: 'hidden',
+            position: 'relative'
         }}>
+            {/* Background Image */}
+            <div style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: 'url(/hero-bg.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                opacity: 0.85,
+                zIndex: 0
+            }} />
+            
+            {/* Dark Overlay */}
+            <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.4) 0%, rgba(30, 41, 59, 0.3) 50%, rgba(45, 27, 105, 0.4) 100%)',
+                zIndex: 1
+            }} />
+            
             {/* Animated Liquid Blobs */}
             <LiquidBlob color="blue" size={400} top="5%" right="5%" delay={0} />
             <LiquidBlob color="purple" size={350} bottom="10%" left="5%" delay={2} />
@@ -71,10 +92,11 @@ function Hero() {
                 backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)',
                 backgroundSize: '50px 50px',
                 opacity: 0.3,
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                zIndex: 2
             }} />
 
-            <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+            <div className="container" style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                 <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
                     <div style={{ maxWidth: '700px', width: '100%' }}>
                         {/* Badge */}
@@ -146,12 +168,13 @@ function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 }}
                             style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', width: '100%' }}
+                            className="hero-buttons"
                         >
                             <Link 
                                 to="/contact"
                                 className="btn hw-accelerate"
                                 style={{ 
-                                    padding: '18px 32px',
+                                    padding: '18px 40px',
                                     fontSize: '1.05rem',
                                     fontWeight: 700,
                                     borderRadius: '9999px',
@@ -162,10 +185,7 @@ function Hero() {
                                     border: 'none',
                                     cursor: 'pointer',
                                     display: 'inline-block',
-                                    textAlign: 'center',
-                                    flex: '1 1 auto',
-                                    minWidth: '180px',
-                                    maxWidth: '100%'
+                                    textAlign: 'center'
                                 }}
                                 onMouseEnter={e => {
                                     e.target.style.transform = 'translateY(-3px)'
@@ -182,16 +202,13 @@ function Hero() {
                                 to="/case-studies" 
                                 className="btn btn-outline btn-lg hw-accelerate" 
                                 style={{ 
-                                    padding: '18px 32px', 
+                                    padding: '18px 40px', 
                                     fontSize: '1.05rem',
                                     background: 'rgba(255, 255, 255, 0.08)',
                                     backdropFilter: 'blur(12px)',
                                     border: '2px solid rgba(255, 255, 255, 0.2)',
                                     color: 'white',
-                                    textAlign: 'center',
-                                    flex: '1 1 auto',
-                                    minWidth: '180px',
-                                    maxWidth: '100%'
+                                    textAlign: 'center'
                                 }}
                             >
                                 View Case Studies
@@ -406,7 +423,7 @@ function FinalCTA() {
                     }}>
                         Join top-performing real estate teams using AI automation to convert more leads and book more showings.
                     </p>
-                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }} className="cta-buttons">
                         <Link 
                             to="/contact" 
                             className="btn hw-accelerate"
@@ -415,9 +432,9 @@ function FinalCTA() {
                                 fontSize: '1.1rem',
                                 fontWeight: 700,
                                 borderRadius: '9999px',
-                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
-                                color: '#0A1628',
-                                boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                background: 'linear-gradient(135deg, #3B82F6, #60A5FA)',
+                                color: '#FFFFFF',
+                                boxShadow: '0 10px 40px rgba(59, 130, 246, 0.4)',
                                 transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
                                 border: 'none',
                                 cursor: 'pointer',
@@ -425,11 +442,11 @@ function FinalCTA() {
                             }}
                             onMouseEnter={e => {
                                 e.target.style.transform = 'translateY(-3px)'
-                                e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
+                                e.target.style.boxShadow = '0 15px 50px rgba(59, 130, 246, 0.5)'
                             }}
                             onMouseLeave={e => {
                                 e.target.style.transform = 'translateY(0)'
-                                e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                                e.target.style.boxShadow = '0 10px 40px rgba(59, 130, 246, 0.4)'
                             }}
                         >
                             Book a Strategy Call

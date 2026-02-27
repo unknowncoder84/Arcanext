@@ -58,7 +58,7 @@ export default function Pricing() {
     return (
         <>
             {/* Hero Section with Liquid Glass */}
-            <GlassSection style={{ 
+            <GlassSection className="hero-section" style={{ 
                 background: 'linear-gradient(135deg, #0A1628 0%, #1E293B 50%, #2D1B69 100%)',
                 paddingTop: '160px', 
                 paddingBottom: '100px',
@@ -66,13 +66,13 @@ export default function Pricing() {
                 {/* Animated Liquid Blobs */}
                 <LiquidBlob color="blue" size={500} top="10%" left="5%" delay={0} />
                 <LiquidBlob color="purple" size={400} bottom="15%" right="10%" delay={2} />
-                <LiquidBlob color="gold" size={350} top="40%" right="30%" delay={4} />
+                <LiquidBlob color="blue" size={350} top="40%" right="30%" delay={4} />
                 
                 {/* Grid Pattern Overlay */}
                 <div style={{ 
                     position: 'absolute', 
                     inset: 0, 
-                    backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)',
                     backgroundSize: '50px 50px',
                     opacity: 0.3,
                     pointerEvents: 'none'
@@ -87,10 +87,10 @@ export default function Pricing() {
                             transition={{ duration: 0.4 }}
                             style={{ 
                                 marginBottom: '16px', 
-                                background: 'rgba(212, 175, 55, 0.15)', 
-                                border: '1px solid rgba(212, 175, 55, 0.3)',
+                                background: 'rgba(59, 130, 246, 0.15)', 
+                                border: '1px solid rgba(59, 130, 246, 0.3)',
                                 backdropFilter: 'blur(10px)',
-                                color: '#F4E4B0'
+                                color: '#60A5FA'
                             }}
                         >
                             Real Estate AI Automation Pricing
@@ -100,21 +100,21 @@ export default function Pricing() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                             style={{ 
-                                fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
+                                fontSize: 'clamp(2rem, 5vw, 4rem)', 
                                 color: 'white', 
                                 marginBottom: '20px', 
                                 fontWeight: 800,
-                                lineHeight: 1.1
+                                lineHeight: 1.2
                             }}
                         >
-                            Invest in <span style={{ background: 'linear-gradient(135deg,#D4AF37,#F4E4B0)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>AI-Powered</span> Lead Generation
+                            Invest in <span style={{ background: 'linear-gradient(135deg,#3B82F6,#60A5FA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>AI-Powered</span> Lead Generation
                         </motion.h1>
                         <motion.p 
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.2 }}
                             style={{ 
-                                fontSize: '1.2rem', 
+                                fontSize: 'clamp(1rem, 3vw, 1.2rem)', 
                                 color: 'rgba(255,255,255,0.8)', 
                                 maxWidth: 700, 
                                 margin: '0 auto', 
@@ -130,17 +130,18 @@ export default function Pricing() {
             {/* Pricing Cards with Liquid Glass */}
             <section className="section" style={{ paddingTop: '80px', background: 'var(--slate-dark)' }}>
                 <div className="container">
-                    <div className="grid-2" style={{ maxWidth: 1100, margin: '0 auto', gap: '40px' }}>
+                    <div className="grid-2" style={{ maxWidth: 1100, margin: '0 auto', gap: 'clamp(24px, 5vw, 40px)' }}>
                         {plans.map((plan, i) => (
                             <LiquidGlassCard 
                                 key={i}
                                 delay={i * 0.15}
+                                className="pricing-card"
                                 style={{
                                     textAlign: 'center',
-                                    padding: '48px 40px',
-                                    border: plan.popular ? '2px solid rgba(212, 175, 55, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)',
+                                    padding: 'clamp(32px, 6vw, 48px) clamp(24px, 5vw, 40px)',
+                                    border: plan.popular ? '2px solid rgba(59, 130, 246, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)',
                                     background: plan.popular 
-                                        ? 'rgba(212, 175, 55, 0.08)' 
+                                        ? 'rgba(59, 130, 246, 0.08)' 
                                         : 'rgba(255, 255, 255, 0.06)',
                                     position: 'relative',
                                     transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
@@ -156,14 +157,14 @@ export default function Pricing() {
                                             top: -16, 
                                             left: '50%', 
                                             transform: 'translateX(-50%)',
-                                            background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
-                                            color: '#0A1628', 
+                                            background: 'linear-gradient(135deg, #3B82F6, #60A5FA)', 
+                                            color: 'white', 
                                             padding: '6px 24px',
                                             borderRadius: '9999px', 
                                             fontSize: '0.85rem', 
                                             fontWeight: 700,
                                             letterSpacing: '0.05em',
-                                            boxShadow: '0 4px 12px rgba(212, 175, 55, 0.4)',
+                                            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
                                         }}
                                     >
                                         {plan.badge}
@@ -205,18 +206,18 @@ export default function Pricing() {
                                 {/* Pricing Display */}
                                 <div style={{ 
                                     marginBottom: 36, 
-                                    padding: '28px', 
+                                    padding: 'clamp(20px, 4vw, 28px)', 
                                     background: plan.popular 
-                                        ? 'rgba(212, 175, 55, 0.1)' 
+                                        ? 'rgba(59, 130, 246, 0.1)' 
                                         : 'rgba(59, 130, 246, 0.08)', 
                                     borderRadius: '16px',
-                                    border: '1px solid ' + (plan.popular ? 'rgba(212, 175, 55, 0.2)' : 'rgba(59, 130, 246, 0.2)')
+                                    border: '1px solid ' + (plan.popular ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0.2)')
                                 }}>
                                     {plan.setup ? (
                                         <>
                                             <div style={{ marginBottom: 20 }}>
                                                 <div style={{ 
-                                                    fontSize: '0.85rem', 
+                                                    fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', 
                                                     color: 'rgba(255,255,255,0.6)', 
                                                     marginBottom: 8, 
                                                     fontWeight: 600, 
@@ -224,40 +225,40 @@ export default function Pricing() {
                                                     letterSpacing: '0.05em' 
                                                 }}>Setup Fee</div>
                                                 <span style={{ 
-                                                    fontSize: '3.2rem', 
+                                                    fontSize: 'clamp(2.5rem, 6vw, 3.2rem)', 
                                                     fontWeight: 800, 
-                                                    color: '#F4E4B0', 
+                                                    color: '#60A5FA', 
                                                     fontFamily: 'Poppins' 
                                                 }}>
                                                     {plan.setup}
                                                 </span>
-                                                <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', marginLeft: 8 }}>one-time</span>
+                                                <span style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'rgba(255,255,255,0.5)', marginLeft: 8 }}>one-time</span>
                                             </div>
                                             <div style={{ 
-                                                padding: '20px', 
+                                                padding: 'clamp(16px, 3vw, 20px)', 
                                                 background: 'linear-gradient(135deg, #10B981, #059669)', 
                                                 borderRadius: '12px',
                                                 color: 'white',
                                                 boxShadow: '0 4px 20px rgba(16, 185, 129, 0.3)'
                                             }}>
-                                                <div style={{ fontSize: '0.85rem', marginBottom: 8, opacity: 0.9, fontWeight: 600 }}>Performance Commission</div>
-                                                <div style={{ fontSize: '2.2rem', fontWeight: 800, fontFamily: 'Poppins' }}>
+                                                <div style={{ fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', marginBottom: 8, opacity: 0.9, fontWeight: 600 }}>Performance Commission</div>
+                                                <div style={{ fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', fontWeight: 800, fontFamily: 'Poppins' }}>
                                                     {plan.commission}
                                                 </div>
-                                                <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>per booked appointment</div>
+                                                <div style={{ fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', opacity: 0.9 }}>per booked appointment</div>
                                             </div>
                                         </>
                                     ) : (
                                         <>
                                             <span style={{ 
-                                                fontSize: '3.8rem', 
+                                                fontSize: 'clamp(2.8rem, 7vw, 3.8rem)', 
                                                 fontWeight: 800, 
                                                 color: '#60A5FA', 
                                                 fontFamily: 'Poppins' 
                                             }}>
                                                 {plan.price}
                                             </span>
-                                            <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', marginTop: 8 }}>
+                                            <div style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'rgba(255,255,255,0.5)', marginTop: 8 }}>
                                                 {plan.priceLabel}
                                             </div>
                                         </>
@@ -293,7 +294,7 @@ export default function Pricing() {
                                                 height: 22, 
                                                 borderRadius: '50%', 
                                                 background: plan.popular 
-                                                    ? 'linear-gradient(135deg, #D4AF37, #F4E4B0)' 
+                                                    ? 'linear-gradient(135deg, #3B82F6, #60A5FA)' 
                                                     : 'linear-gradient(135deg, #3B82F6, #60A5FA)', 
                                                 display: 'flex', 
                                                 alignItems: 'center', 
@@ -301,10 +302,10 @@ export default function Pricing() {
                                                 flexShrink: 0,
                                                 marginTop: 2,
                                                 boxShadow: plan.popular 
-                                                    ? '0 2px 8px rgba(212, 175, 55, 0.3)'
+                                                    ? '0 2px 8px rgba(59, 130, 246, 0.3)'
                                                     : '0 2px 8px rgba(59, 130, 246, 0.3)'
                                             }}>
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={plan.popular ? '#0A1628' : 'white'} strokeWidth="3">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={plan.popular ? 'white' : 'white'} strokeWidth="3">
                                                     <polyline points="20 6 9 17 4 12" />
                                                 </svg>
                                             </div>
@@ -320,18 +321,18 @@ export default function Pricing() {
                                     style={{ 
                                         display: 'block',
                                         width: '100%',
-                                        padding: '18px',
-                                        fontSize: '1.05rem',
+                                        padding: 'clamp(16px, 3vw, 18px)',
+                                        fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
                                         fontWeight: 700,
                                         borderRadius: '9999px',
                                         background: plan.popular 
-                                            ? 'linear-gradient(135deg, #D4AF37, #F4E4B0)'
+                                            ? 'linear-gradient(135deg, #3B82F6, #60A5FA)'
                                             : 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
-                                        color: plan.popular ? '#0A1628' : 'white',
+                                        color: 'white',
                                         textAlign: 'center',
                                         transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
                                         boxShadow: plan.popular 
-                                            ? '0 10px 30px rgba(212, 175, 55, 0.3)'
+                                            ? '0 10px 30px rgba(59, 130, 246, 0.3)'
                                             : '0 10px 30px rgba(59, 130, 246, 0.3)',
                                         border: 'none',
                                         cursor: 'pointer'
@@ -339,13 +340,13 @@ export default function Pricing() {
                                     onMouseEnter={e => {
                                         e.target.style.transform = 'translateY(-3px)'
                                         e.target.style.boxShadow = plan.popular 
-                                            ? '0 15px 40px rgba(212, 175, 55, 0.5)'
+                                            ? '0 15px 40px rgba(59, 130, 246, 0.5)'
                                             : '0 15px 40px rgba(59, 130, 246, 0.4)'
                                     }}
                                     onMouseLeave={e => {
                                         e.target.style.transform = 'translateY(0)'
                                         e.target.style.boxShadow = plan.popular 
-                                            ? '0 10px 30px rgba(212, 175, 55, 0.3)'
+                                            ? '0 10px 30px rgba(59, 130, 246, 0.3)'
                                             : '0 10px 30px rgba(59, 130, 246, 0.3)'
                                     }}
                                 >

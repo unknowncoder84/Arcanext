@@ -93,7 +93,7 @@ export default function Services() {
     return (
         <>
             {/* Hero */}
-            <section style={{
+            <section className="hero-section" style={{
                 background: 'var(--gradient-hero)', paddingTop: '160px', paddingBottom: '100px',
                 position: 'relative', overflow: 'hidden',
             }}>
@@ -104,10 +104,10 @@ export default function Services() {
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <AnimatedSection>
                         <span className="badge badge-light" style={{ marginBottom: '16px' }}>Our Services</span>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px', maxWidth: 600 }}>
+                        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px', maxWidth: 600, lineHeight: 1.2 }}>
                             Automation Solutions That <span style={{ background: 'linear-gradient(135deg, #60A5FA, #A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Drive Results</span>
                         </h1>
-                        <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', maxWidth: 520, lineHeight: 1.7 }}>
+                        <p style={{ fontSize: 'clamp(1rem, 3vw, 1.15rem)', color: 'rgba(255,255,255,0.7)', maxWidth: 520, lineHeight: 1.7 }}>
                             End-to-end AI automation services designed to capture more leads, close more deals, and grow your business.
                         </p>
                     </AnimatedSection>
@@ -122,7 +122,7 @@ export default function Services() {
                             {/* Image - Alternating sides */}
                             <AnimatedSection variant={index % 2 === 0 ? 'fadeLeft' : 'fadeRight'} style={{ order: index % 2 === 0 ? 1 : 2 }}>
                                 <div style={{ position: 'relative' }}>
-                                    <div style={{
+                                    <div className="service-image" style={{
                                         borderRadius: 'var(--radius-xl)',
                                         overflow: 'hidden',
                                         boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
@@ -170,7 +170,7 @@ export default function Services() {
                                     </div>
 
                                     {/* Stats Cards */}
-                                    <div style={{
+                                    <div className="stats-grid" style={{
                                         display: 'grid',
                                         gridTemplateColumns: '1fr 1fr',
                                         gap: '16px',
@@ -183,7 +183,7 @@ export default function Services() {
                                                 borderRadius: 'var(--radius-md)',
                                                 textAlign: 'center',
                                             }}>
-                                                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins' }}>{stat.value}</div>
+                                                <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins' }}>{stat.value}</div>
                                                 <div style={{ fontSize: '0.85rem', color: 'var(--gray-600)' }}>{stat.label}</div>
                                             </div>
                                         ))}
@@ -194,15 +194,15 @@ export default function Services() {
                             {/* Content */}
                             <AnimatedSection variant={index % 2 === 0 ? 'fadeRight' : 'fadeLeft'} style={{ order: index % 2 === 0 ? 2 : 1 }}>
                                 <div>
-                                    <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>{service.title}</h2>
-                                    <p style={{ color: 'var(--gray-500)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '32px' }}>
+                                    <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '16px', lineHeight: 1.3 }}>{service.title}</h2>
+                                    <p style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.7, marginBottom: '32px' }}>
                                         {service.desc}
                                     </p>
 
-                                    <h3 style={{ fontSize: '1.1rem', marginBottom: '20px', fontWeight: 600 }}>Key Features:</h3>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
+                                    <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', marginBottom: '20px', fontWeight: 600 }}>Key Features:</h3>
+                                    <div className="feature-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
                                         {service.features.map((f, i) => (
-                                            <div key={i} style={{
+                                            <div key={i} className="feature-item" style={{
                                                 display: 'flex',
                                                 alignItems: 'flex-start',
                                                 gap: '12px',
@@ -211,7 +211,7 @@ export default function Services() {
                                                 borderRadius: 'var(--radius-md)',
                                                 border: '1px solid var(--gray-200)',
                                             }}>
-                                                <div style={{
+                                                <div className="feature-icon" style={{
                                                     width: 40,
                                                     height: 40,
                                                     borderRadius: 'var(--radius-sm)',
@@ -226,8 +226,8 @@ export default function Services() {
                                                     {f.icon}
                                                 </div>
                                                 <div>
-                                                    <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: '0.95rem' }}>{f.title}</div>
-                                                    <div style={{ color: 'var(--gray-500)', fontSize: '0.85rem', lineHeight: 1.5 }}>{f.desc}</div>
+                                                    <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>{f.title}</div>
+                                                    <div style={{ color: 'var(--gray-500)', fontSize: 'clamp(0.8rem, 2vw, 0.85rem)', lineHeight: 1.5 }}>{f.desc}</div>
                                                 </div>
                                             </div>
                                         ))}
