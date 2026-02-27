@@ -4,16 +4,39 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/An
 
 const plans = [
     {
-        name: 'Starter', setup: '$1,000', monthly: '$500', annual: '$400',
-        features: ['Lead Capture Setup', 'Email Automation', 'Basic Reporting', 'CRM Integration', 'Email Support'],
+        name: 'Starter Pack', 
+        price: '$1,599', 
+        priceLabel: 'One-Time Setup',
+        description: 'Foundational AI integration for your business',
+        features: [
+            'Complete AI System Setup',
+            'AI Voice Technology Integration',
+            'Lead Capture Automation', 
+            'Email & SMS Automation', 
+            'Basic CRM Integration', 
+            'Automated Workflows',
+            'Training & Documentation',
+            '30 Days Email Support'
+        ],
     },
     {
-        name: 'Growth', setup: '$2,500', monthly: '$1,200', annual: '$960', popular: true,
-        features: ['Everything in Starter', 'AI Follow-Up Systems', 'Advanced Dashboards', 'Multi-Channel Automation', 'Priority Support', 'Custom Workflows'],
-    },
-    {
-        name: 'Scale', setup: 'Custom', monthly: 'Custom', annual: 'Custom',
-        features: ['Everything in Growth', 'Dedicated AI Specialist', 'Enterprise Integrations', 'SLA Guarantee', 'White-Glove Onboarding', 'Custom Development'],
+        name: 'Performance Tier', 
+        setup: '$699', 
+        commission: '$99',
+        priceLabel: 'Setup + Success-Based Commission',
+        description: 'Pay for results - only when appointments are booked',
+        popular: true,
+        features: [
+            'Everything in Starter Pack',
+            'Advanced AI Follow-Up Systems', 
+            'Real-Time Analytics Dashboards', 
+            'Multi-Channel Automation', 
+            'Custom Workflow Builder',
+            'Priority Support & Training',
+            'Dedicated Account Manager',
+            'Only $99 per booked appointment'
+        ],
+        highlight: 'Success-Based Pricing'
     },
 ]
 
@@ -25,83 +48,182 @@ const faqs = [
 ]
 
 export default function Pricing() {
-    const [annual, setAnnual] = useState(false)
     const [openFaq, setOpenFaq] = useState(null)
 
     return (
         <>
-            <section style={{ background: 'var(--gradient-hero)', paddingTop: '160px', paddingBottom: '100px', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%)' }} />
+            <section style={{ 
+                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%), url("https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&h=1080&fit=crop&q=80") center/cover',
+                paddingTop: '160px', 
+                paddingBottom: '100px', 
+                position: 'relative', 
+                overflow: 'hidden' 
+            }}>
+                {/* Animated Background Elements */}
+                <div style={{ position: 'absolute', inset: 0, opacity: 0.1 }}>
+                    <div style={{ position: 'absolute', top: '20%', left: '10%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59,130,246,0.6), transparent 70%)', filter: 'blur(80px)', animation: 'float 8s ease-in-out infinite' }} />
+                    <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.6), transparent 70%)', filter: 'blur(80px)', animation: 'float 10s ease-in-out infinite reverse' }} />
+                </div>
+                
                 <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <AnimatedSection>
-                        <span className="badge badge-light" style={{ marginBottom: '16px' }}>Pricing</span>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'white', marginBottom: '20px' }}>
-                            Simple, <span style={{ background: 'linear-gradient(135deg,#60A5FA,#A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Transparent</span> Pricing
+                        <span className="badge badge-light" style={{ marginBottom: '16px', background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.3)' }}>Transparent Pricing</span>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', color: 'white', marginBottom: '20px', fontWeight: 800 }}>
+                            Invest in <span style={{ background: 'linear-gradient(135deg,#60A5FA,#A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>AI-Powered</span> Growth
                         </h1>
-                        <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
-                            Choose the plan that fits your business. No hidden fees.
+                        <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', maxWidth: 600, margin: '0 auto', lineHeight: 1.8 }}>
+                            Choose the plan that scales with your success. No hidden fees, no long-term contracts.
                         </p>
                     </AnimatedSection>
                 </div>
             </section>
 
-            <section className="section">
+            <section className="section" style={{ paddingTop: '80px' }}>
                 <div className="container">
-                    {/* Toggle */}
-                    <AnimatedSection>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '64px' }}>
-                            <span style={{ fontWeight: 600, color: !annual ? 'var(--primary)' : 'var(--gray-400)' }}>Monthly</span>
-                            <button onClick={() => setAnnual(!annual)} style={{
-                                width: 56, height: 30, borderRadius: 15, border: 'none', cursor: 'pointer', position: 'relative',
-                                background: annual ? 'var(--primary)' : 'var(--gray-300)', transition: 'var(--transition)',
-                            }}>
-                                <div style={{
-                                    width: 24, height: 24, borderRadius: '50%', background: 'white', position: 'absolute', top: 3,
-                                    left: annual ? 29 : 3, transition: 'var(--transition)', boxShadow: 'var(--shadow-sm)',
-                                }} />
-                            </button>
-                            <span style={{ fontWeight: 600, color: annual ? 'var(--primary)' : 'var(--gray-400)' }}>
-                                Annual <span style={{ fontSize: '0.8rem', color: 'var(--primary)', background: 'var(--primary-100)', padding: '2px 8px', borderRadius: 'var(--radius-full)', marginLeft: 4 }}>Save 20%</span>
-                            </span>
-                        </div>
-                    </AnimatedSection>
-
                     {/* Plans */}
-                    <StaggerContainer className="grid-3" staggerDelay={0.1}>
+                    <StaggerContainer className="grid-2" staggerDelay={0.15} style={{ maxWidth: 1000, margin: '0 auto' }}>
                         {plans.map((plan, i) => (
                             <StaggerItem key={i}>
                                 <div className="card" style={{
-                                    position: 'relative', textAlign: 'center', height: '100%',
-                                    border: plan.popular ? '2px solid var(--primary)' : undefined,
-                                    boxShadow: plan.popular ? 'var(--shadow-glow)' : undefined,
-                                    transform: plan.popular ? 'scale(1.03)' : undefined,
+                                    position: 'relative', 
+                                    textAlign: 'center', 
+                                    height: '100%',
+                                    padding: '48px 40px',
+                                    border: plan.popular ? '2px solid var(--primary)' : '2px solid var(--gray-200)',
+                                    boxShadow: plan.popular ? '0 20px 60px rgba(59,130,246,0.25)' : '0 10px 30px rgba(0,0,0,0.08)',
+                                    transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
+                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    background: plan.popular ? 'linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%)' : 'white',
                                 }}>
                                     {plan.popular && (
                                         <div style={{
-                                            position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
-                                            background: 'var(--gradient-card)', color: 'white', padding: '4px 20px',
-                                            borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 600,
-                                        }}>Most Popular</div>
+                                            position: 'absolute', 
+                                            top: -16, 
+                                            left: '50%', 
+                                            transform: 'translateX(-50%)',
+                                            background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)', 
+                                            color: 'white', 
+                                            padding: '6px 24px',
+                                            borderRadius: 'var(--radius-full)', 
+                                            fontSize: '0.85rem', 
+                                            fontWeight: 700,
+                                            letterSpacing: '0.05em',
+                                            boxShadow: '0 4px 12px rgba(59,130,246,0.4)',
+                                        }}>MOST POPULAR</div>
                                     )}
-                                    <h3 style={{ fontSize: '1.4rem', marginBottom: 8, marginTop: plan.popular ? 8 : 0 }}>{plan.name}</h3>
-                                    <div style={{ marginBottom: 8 }}>
-                                        <span style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--primary)' }}>
-                                            {annual ? plan.annual : plan.monthly}
-                                        </span>
-                                        {plan.monthly !== 'Custom' && <span style={{ color: 'var(--gray-500)' }}>/mo</span>}
+                                    
+                                    <h3 style={{ 
+                                        fontSize: '1.8rem', 
+                                        marginBottom: 12, 
+                                        marginTop: plan.popular ? 12 : 0,
+                                        fontWeight: 800,
+                                        fontFamily: 'Poppins'
+                                    }}>{plan.name}</h3>
+                                    
+                                    <p style={{ 
+                                        color: 'var(--gray-600)', 
+                                        fontSize: '0.95rem', 
+                                        marginBottom: 28,
+                                        lineHeight: 1.6
+                                    }}>{plan.description}</p>
+                                    
+                                    {/* Pricing Display */}
+                                    <div style={{ marginBottom: 32, padding: '24px', background: plan.popular ? 'rgba(59,130,246,0.05)' : 'var(--gray-50)', borderRadius: 'var(--radius-lg)' }}>
+                                        {plan.setup ? (
+                                            <>
+                                                <div style={{ marginBottom: 16 }}>
+                                                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Setup Fee</div>
+                                                    <span style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins' }}>
+                                                        {plan.setup}
+                                                    </span>
+                                                    <span style={{ fontSize: '0.9rem', color: 'var(--gray-500)', marginLeft: 8 }}>one-time</span>
+                                                </div>
+                                                <div style={{ 
+                                                    padding: '16px', 
+                                                    background: 'linear-gradient(135deg, #10B981, #059669)', 
+                                                    borderRadius: 'var(--radius-md)',
+                                                    color: 'white'
+                                                }}>
+                                                    <div style={{ fontSize: '0.85rem', marginBottom: 6, opacity: 0.9, fontWeight: 600 }}>Success-Based Commission</div>
+                                                    <div style={{ fontSize: '2rem', fontWeight: 800, fontFamily: 'Poppins' }}>
+                                                        {plan.commission}
+                                                    </div>
+                                                    <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>per booked appointment</div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'Poppins' }}>
+                                                    {plan.price}
+                                                </span>
+                                                <div style={{ fontSize: '0.9rem', color: 'var(--gray-500)', marginTop: 8 }}>
+                                                    {plan.priceLabel}
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--gray-400)', marginBottom: 28 }}>
-                                        {plan.setup !== 'Custom' ? `${plan.setup} one-time setup` : 'Custom setup & pricing'}
-                                    </div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32, textAlign: 'left' }}>
+                                    
+                                    {/* Features */}
+                                    <div style={{ 
+                                        display: 'flex', 
+                                        flexDirection: 'column', 
+                                        gap: 14, 
+                                        marginBottom: 36, 
+                                        textAlign: 'left' 
+                                    }}>
                                         {plan.features.map((f, j) => (
-                                            <div key={j} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                                                <span style={{ color: 'var(--primary)', fontWeight: 700 }}>✓</span> {f}
+                                            <div key={j} style={{ 
+                                                display: 'flex', 
+                                                alignItems: 'flex-start', 
+                                                gap: 12, 
+                                                fontSize: '0.95rem', 
+                                                color: 'var(--gray-700)',
+                                                lineHeight: 1.6
+                                            }}>
+                                                <div style={{ 
+                                                    width: 20, 
+                                                    height: 20, 
+                                                    borderRadius: '50%', 
+                                                    background: plan.popular ? 'linear-gradient(135deg, #3B82F6, #8B5CF6)' : 'var(--primary-100)', 
+                                                    display: 'flex', 
+                                                    alignItems: 'center', 
+                                                    justifyContent: 'center',
+                                                    flexShrink: 0,
+                                                    marginTop: 2
+                                                }}>
+                                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={plan.popular ? 'white' : 'var(--primary)'} strokeWidth="3">
+                                                        <polyline points="20 6 9 17 4 12" />
+                                                    </svg>
+                                                </div>
+                                                <span style={{ fontWeight: j === plan.features.length - 1 ? 700 : 500 }}>{f}</span>
                                             </div>
                                         ))}
                                     </div>
-                                    <Link to="/portal" className={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`} style={{ width: '100%' }}>
-                                        {plan.name === 'Scale' ? 'Contact Us' : 'Get Started'}
+                                    
+                                    {/* CTA Button - Redirect to Contact */}
+                                    <Link 
+                                        to="/contact"
+                                        className={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'} btn-lg`} 
+                                        style={{ 
+                                            width: '100%',
+                                            padding: '18px',
+                                            fontSize: '1.05rem',
+                                            fontWeight: 700,
+                                            transition: 'all 0.3s ease',
+                                            boxShadow: plan.popular ? '0 10px 30px rgba(59,130,246,0.3)' : 'none',
+                                            display: 'block',
+                                            textAlign: 'center'
+                                        }}
+                                        onMouseEnter={e => {
+                                            e.target.style.transform = 'translateY(-2px)'
+                                            e.target.style.boxShadow = plan.popular ? '0 15px 40px rgba(59,130,246,0.4)' : '0 10px 30px rgba(0,0,0,0.15)'
+                                        }}
+                                        onMouseLeave={e => {
+                                            e.target.style.transform = 'translateY(0)'
+                                            e.target.style.boxShadow = plan.popular ? '0 10px 30px rgba(59,130,246,0.3)' : 'none'
+                                        }}
+                                    >
+                                        Book Now →
                                     </Link>
                                 </div>
                             </StaggerItem>

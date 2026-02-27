@@ -41,56 +41,122 @@ const pricingPlans = [
 function Hero() {
     return (
         <section style={{
-            background: 'var(--gradient-hero)',
+            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.97) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(51, 65, 85, 0.93) 100%), url("https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&h=1080&fit=crop&q=80") center/cover fixed',
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
             position: 'relative',
             overflow: 'hidden',
         }}>
-            {/* Animated bg elements */}
-            <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+            {/* Animated Neural Network Pattern */}
+            <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', opacity: 0.15 }}>
                 <motion.div animate={{ x: [0, 30, 0], y: [0, -20, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', top: '10%', right: '10%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3), transparent 70%)' }} />
+                    style={{ position: 'absolute', top: '10%', right: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent 70%)', filter: 'blur(80px)' }} />
                 <motion.div animate={{ x: [0, -20, 0], y: [0, 30, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', bottom: '10%', left: '5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent 70%)' }} />
+                    style={{ position: 'absolute', bottom: '10%', left: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%)', filter: 'blur(80px)' }} />
                 <motion.div animate={{ x: [0, 15, 0], y: [0, 15, 0] }} transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', top: '40%', left: '30%', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%)' }} />
+                    style={{ position: 'absolute', top: '40%', left: '30%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16, 185, 129, 0.4), transparent 70%)', filter: 'blur(80px)' }} />
             </div>
 
+            {/* Grid Pattern Overlay */}
+            <div style={{ 
+                position: 'absolute', 
+                inset: 0, 
+                backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)',
+                backgroundSize: '50px 50px',
+                opacity: 0.3
+            }} />
+
             <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '100px' }}>
-                <div style={{ maxWidth: '720px' }}>
+                <div style={{ maxWidth: '800px' }}>
                     <AnimatedSection>
-                        <span className="badge badge-light" style={{ marginBottom: '24px' }}>
-                            ⚡ AI-Powered Business Automation
+                        <span className="badge badge-light" style={{ 
+                            marginBottom: '24px',
+                            background: 'rgba(59,130,246,0.15)',
+                            border: '1px solid rgba(59,130,246,0.3)',
+                            backdropFilter: 'blur(10px)',
+                            padding: '8px 20px',
+                            fontSize: '0.9rem',
+                            fontWeight: 600
+                        }}>
+                            AI-Powered Business Automation
                         </span>
                     </AnimatedSection>
                     <AnimatedSection delay={0.1}>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', color: 'var(--white)', marginBottom: '24px', lineHeight: 1.1 }}>
-                            AI Automation Systems That Turn{' '}
-                            <span style={{ background: 'linear-gradient(135deg, #60A5FA, #A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                                Leads Into Revenue
+                        <h1 style={{ fontSize: 'clamp(2.8rem, 6vw, 4.5rem)', color: 'var(--white)', marginBottom: '28px', lineHeight: 1.1, fontWeight: 800 }}>
+                            Transform Leads Into{' '}
+                            <span style={{ background: 'linear-gradient(135deg, #60A5FA, #A78BFA, #10B981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                                Revenue
                             </span>
+                            {' '}With AI
                         </h1>
                     </AnimatedSection>
                     <AnimatedSection delay={0.2}>
-                        <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, marginBottom: '40px', maxWidth: '560px' }}>
-                            Arcanext builds intelligent automation systems that capture, nurture, and convert leads automatically — so you can focus on growing your business.
+                        <p style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, marginBottom: '48px', maxWidth: '640px' }}>
+                            Arcanext builds intelligent automation systems powered by AI voice technology and automated workflows that capture, nurture, and convert leads 24/7 — while you focus on scaling your business.
                         </p>
                     </AnimatedSection>
                     <AnimatedSection delay={0.3}>
-                        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                            <Link to="/pricing" className="btn btn-primary btn-lg">Book a Strategy Call</Link>
-                            <Link to="/case-studies" className="btn btn-outline btn-lg">View Case Studies →</Link>
+                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                            <Link 
+                                to="/contact"
+                                className="btn btn-primary btn-lg"
+                                style={{ 
+                                    padding: '18px 40px',
+                                    fontSize: '1.1rem',
+                                    boxShadow: '0 10px 40px rgba(59,130,246,0.4)',
+                                    transition: 'all 0.3s ease'
+                                }}
+                                onMouseEnter={e => {
+                                    e.target.style.transform = 'translateY(-3px)'
+                                    e.target.style.boxShadow = '0 15px 50px rgba(59,130,246,0.5)'
+                                }}
+                                onMouseLeave={e => {
+                                    e.target.style.transform = 'translateY(0)'
+                                    e.target.style.boxShadow = '0 10px 40px rgba(59,130,246,0.4)'
+                                }}
+                            >
+                                Book a Strategy Call →
+                            </Link>
+                            <Link to="/case-studies" className="btn btn-outline btn-lg" style={{ padding: '18px 40px', fontSize: '1.1rem' }}>
+                                View Case Studies
+                            </Link>
                         </div>
                     </AnimatedSection>
                     <AnimatedSection delay={0.5}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginTop: '48px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                <div style={{ fontSize: '2rem' }}>⭐</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '32px', marginTop: '56px', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                                <div style={{ 
+                                    width: 48, 
+                                    height: 48, 
+                                    borderRadius: '50%', 
+                                    background: 'linear-gradient(135deg, #F59E0B, #EF4444)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '1.5rem',
+                                    boxShadow: '0 8px 20px rgba(245,158,11,0.3)'
+                                }}>⭐</div>
                                 <div>
-                                    <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>Trusted by 50+ businesses</div>
-                                    <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>4.9/5 rating from our clients</div>
+                                    <div style={{ color: 'white', fontWeight: 700, fontSize: '1.05rem' }}>50+ Businesses Trust Us</div>
+                                    <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>4.9/5 average rating</div>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                                <div style={{ 
+                                    width: 48, 
+                                    height: 48, 
+                                    borderRadius: '50%', 
+                                    background: 'linear-gradient(135deg, #10B981, #059669)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '1.5rem',
+                                    boxShadow: '0 8px 20px rgba(16,185,129,0.3)'
+                                }}>🚀</div>
+                                <div>
+                                    <div style={{ color: 'white', fontWeight: 700, fontSize: '1.05rem' }}>2-Week Setup</div>
+                                    <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Go live fast</div>
                                 </div>
                             </div>
                         </div>
@@ -362,7 +428,7 @@ function FinalCTA() {
                         Join 50+ businesses already using Arcanext to capture more leads and close more deals.
                     </p>
                     <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                        <Link to="/pricing" className="btn btn-primary btn-lg">Book a Strategy Call</Link>
+                        <Link to="/contact" className="btn btn-primary btn-lg">Book a Strategy Call</Link>
                         <Link to="/services" className="btn btn-outline btn-lg">Explore Services →</Link>
                     </div>
                 </AnimatedSection>

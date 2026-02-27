@@ -45,7 +45,7 @@ export default function Contact() {
             </section>
 
             {/* Contact Cards */}
-            <section className="section">
+            <section id="contact" className="section">
                 <div className="container">
                     <AnimatedSection>
                         <div className="section-header">
