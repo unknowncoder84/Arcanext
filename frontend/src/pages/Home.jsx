@@ -113,15 +113,15 @@ function Hero() {
                                 fontFamily: 'Poppins'
                             }}
                         >
-                            Stop Losing Hot Buyer Inquiries.{' '}
+                            Every Lead Inquiry Answered{' '}
                             <span style={{ 
                                 background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
                                 WebkitBackgroundClip: 'text', 
                                 WebkitTextFillColor: 'transparent' 
                             }}>
-                                Respond in Under 60 Seconds
+                                Within 60 Seconds
                             </span>
-                            {' '}— Automatically.
+                            {' '}— Automatically 24/7.
                         </motion.h1>
 
                         {/* Sub-headline */}
