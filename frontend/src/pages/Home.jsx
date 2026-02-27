@@ -60,9 +60,9 @@ function Hero() {
             overflowX: 'hidden'
         }}>
             {/* Animated Liquid Blobs */}
-            <LiquidBlob color="blue" size={600} top="5%" right="5%" delay={0} />
-            <LiquidBlob color="purple" size={500} bottom="10%" left="5%" delay={2} />
-            <LiquidBlob color="blue" size={400} top="40%" left="40%" delay={4} />
+            <LiquidBlob color="blue" size={400} top="5%" right="5%" delay={0} />
+            <LiquidBlob color="purple" size={350} bottom="10%" left="5%" delay={2} />
+            <LiquidBlob color="blue" size={300} top="40%" left="40%" delay={4} />
 
             {/* Grid Pattern Overlay */}
             <div style={{ 
@@ -145,13 +145,13 @@ function Hero() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 }}
-                            style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}
+                            style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', width: '100%' }}
                         >
                             <Link 
                                 to="/contact"
                                 className="btn hw-accelerate"
                                 style={{ 
-                                    padding: '18px 40px',
+                                    padding: '18px 32px',
                                     fontSize: '1.05rem',
                                     fontWeight: 700,
                                     borderRadius: '9999px',
@@ -163,7 +163,9 @@ function Hero() {
                                     cursor: 'pointer',
                                     display: 'inline-block',
                                     textAlign: 'center',
-                                    minWidth: '200px'
+                                    flex: '1 1 auto',
+                                    minWidth: '180px',
+                                    maxWidth: '100%'
                                 }}
                                 onMouseEnter={e => {
                                     e.target.style.transform = 'translateY(-3px)'
@@ -180,14 +182,16 @@ function Hero() {
                                 to="/case-studies" 
                                 className="btn btn-outline btn-lg hw-accelerate" 
                                 style={{ 
-                                    padding: '18px 40px', 
+                                    padding: '18px 32px', 
                                     fontSize: '1.05rem',
                                     background: 'rgba(255, 255, 255, 0.08)',
                                     backdropFilter: 'blur(12px)',
                                     border: '2px solid rgba(255, 255, 255, 0.2)',
                                     color: 'white',
                                     textAlign: 'center',
-                                    minWidth: '200px'
+                                    flex: '1 1 auto',
+                                    minWidth: '180px',
+                                    maxWidth: '100%'
                                 }}
                             >
                                 View Case Studies

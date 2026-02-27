@@ -553,3 +553,20 @@ img {
   background: var(--gradient-card);
   color: var(--white);
 }
+
+
+/* Mobile blob optimizations */
+@media (max-width: 768px) {
+  .animate-liquid {
+    max-width: 60vw !important;
+    max-height: 60vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .animate-liquid {
+    max-width: 50vw !important;
+    max-height: 50vh !important;
+    opacity: 0.5 !important;
+  }
+}

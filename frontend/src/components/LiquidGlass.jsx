@@ -125,6 +125,8 @@ export function LiquidBlob({ color = 'blue', size = 400, top, left, right, botto
         pointerEvents: 'none',
         willChange: 'transform, opacity',
         transform: 'translateZ(0)',
+        maxWidth: '80vw',
+        maxHeight: '80vh',
       }}
     />
   )
