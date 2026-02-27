@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import Logo from './Logo'
 
 const navLinks = [
     { path: '/', label: 'Home' },
@@ -42,20 +43,20 @@ export default function Navbar() {
         }}>
             <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 {/* Logo */}
-                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 'var(--radius-sm)',
-                        background: 'var(--gradient-card)',
+                        width: 40,
+                        height: 40,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'white',
-                        fontWeight: 800,
-                        fontSize: '1.1rem',
-                        fontFamily: 'Poppins, sans-serif',
-                    }}>A</div>
+                        transition: 'var(--transition)',
+                    }}>
+                        <Logo 
+                            size={40} 
+                            color={scrolled ? '#1E3A8A' : '#FFFFFF'} 
+                        />
+                    </div>
                     <span style={{
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 700,
