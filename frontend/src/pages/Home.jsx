@@ -6,11 +6,6 @@ import { LiquidGlassCard, LiquidBlob, GlassSection } from '../components/LiquidG
 /* ===== DATA ===== */
 const services = [
     { 
-        title: '24/7 AI Voice Agents', 
-        desc: 'AI-powered voice agents that engage leads within 60 seconds, qualify buyers and sellers, and book appointments automatically.',
-        image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop'
-    },
-    { 
         title: 'Lead Qualification System', 
         desc: 'Intelligent lead scoring and qualification that identifies hot prospects before they reach your desk.',
         image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop'
@@ -63,14 +58,14 @@ function Hero() {
         }}>
             {/* Animated Liquid Blobs */}
             <LiquidBlob color="blue" size={600} top="5%" right="5%" delay={0} />
-            <LiquidBlob color="gold" size={500} bottom="10%" left="5%" delay={2} />
-            <LiquidBlob color="purple" size={400} top="40%" left="40%" delay={4} />
+            <LiquidBlob color="purple" size={500} bottom="10%" left="5%" delay={2} />
+            <LiquidBlob color="blue" size={400} top="40%" left="40%" delay={4} />
 
             {/* Grid Pattern Overlay */}
             <div style={{ 
                 position: 'absolute', 
                 inset: 0, 
-                backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px)',
+                backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)',
                 backgroundSize: '50px 50px',
                 opacity: 0.3,
                 pointerEvents: 'none'
@@ -87,13 +82,13 @@ function Hero() {
                             style={{ marginBottom: '24px' }}
                         >
                             <span className="badge badge-light" style={{ 
-                                background: 'rgba(212, 175, 55, 0.15)',
-                                border: '1px solid rgba(212, 175, 55, 0.3)',
+                                background: 'rgba(59, 130, 246, 0.15)',
+                                border: '1px solid rgba(59, 130, 246, 0.3)',
                                 backdropFilter: 'blur(10px)',
                                 padding: '8px 24px',
                                 fontSize: '0.9rem',
                                 fontWeight: 600,
-                                color: '#F4E4B0'
+                                color: '#60A5FA'
                             }}>
                                 Built for High-Performance Real Estate Teams
                             </span>
@@ -115,7 +110,7 @@ function Hero() {
                         >
                             Every Lead Inquiry Answered{' '}
                             <span style={{ 
-                                background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
+                                background: 'linear-gradient(135deg, #3B82F6, #60A5FA)', 
                                 WebkitBackgroundClip: 'text', 
                                 WebkitTextFillColor: 'transparent' 
                             }}>
@@ -154,9 +149,9 @@ function Hero() {
                                     fontSize: '1.1rem',
                                     fontWeight: 700,
                                     borderRadius: '9999px',
-                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
-                                    color: '#0A1628',
-                                    boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                    background: 'linear-gradient(135deg, #3B82F6, #60A5FA)',
+                                    color: '#FFFFFF',
+                                    boxShadow: '0 10px 40px rgba(59, 130, 246, 0.4)',
                                     transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
                                     border: 'none',
                                     cursor: 'pointer',
@@ -164,11 +159,11 @@ function Hero() {
                                 }}
                                 onMouseEnter={e => {
                                     e.target.style.transform = 'translateY(-3px)'
-                                    e.target.style.boxShadow = '0 15px 50px rgba(212, 175, 55, 0.5)'
+                                    e.target.style.boxShadow = '0 15px 50px rgba(59, 130, 246, 0.5)'
                                 }}
                                 onMouseLeave={e => {
                                     e.target.style.transform = 'translateY(0)'
-                                    e.target.style.boxShadow = '0 10px 40px rgba(212, 175, 55, 0.4)'
+                                    e.target.style.boxShadow = '0 10px 40px rgba(59, 130, 246, 0.4)'
                                 }}
                             >
                                 Book a Strategy Call →
@@ -237,7 +232,7 @@ function ServicesOverview() {
                                     left: 0,
                                     right: 0,
                                     bottom: 0,
-                                    background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.6), rgba(212, 175, 55, 0.3))',
+                                    background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.6), rgba(59, 130, 246, 0.3))',
                                 }} />
                             </div>
                             <div style={{ padding: '28px' }}>
@@ -260,9 +255,9 @@ function HowItWorks() {
                 <AnimatedSection>
                     <div className="section-header">
                         <span className="badge badge-light" style={{ 
-                            background: 'rgba(212, 175, 55, 0.15)', 
-                            border: '1px solid rgba(212, 175, 55, 0.3)',
-                            color: '#F4E4B0'
+                            background: 'rgba(59, 130, 246, 0.15)', 
+                            border: '1px solid rgba(59, 130, 246, 0.3)',
+                            color: '#60A5FA'
                         }}>How It Works</span>
                         <h2 style={{ color: 'white' }}>Three Steps to More Closed Deals</h2>
                         <p style={{ color: 'rgba(255,255,255,0.7)' }}>Our AI automation system works around the clock to convert leads into appointments.</p>
@@ -281,15 +276,15 @@ function HowItWorks() {
                                     height: 80, 
                                     borderRadius: '50%', 
                                     margin: '0 auto 24px',
-                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)', 
+                                    background: 'linear-gradient(135deg, #3B82F6, #60A5FA)', 
                                     display: 'flex', 
                                     alignItems: 'center', 
                                     justifyContent: 'center',
-                                    color: '#0A1628', 
+                                    color: 'white', 
                                     fontWeight: 800, 
                                     fontSize: '1.8rem', 
                                     fontFamily: 'Poppins',
-                                    boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
+                                    boxShadow: '0 8px 24px rgba(59, 130, 246, 0.3)'
                                 }}
                             >
                                 {s.num}
@@ -333,7 +328,7 @@ function Metrics() {
                                     fontWeight: 800, 
                                     marginBottom: '8px', 
                                     fontFamily: 'Poppins',
-                                    background: 'linear-gradient(135deg, #D4AF37, #F4E4B0)',
+                                    background: 'linear-gradient(135deg, #3B82F6, #60A5FA)',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent'
                                 }}
@@ -373,8 +368,8 @@ function FinalCTA() {
             padding: '120px 0',
             position: 'relative'
         }}>
-            <LiquidBlob color="gold" size={500} top="20%" right="10%" delay={0} />
-            <LiquidBlob color="blue" size={400} bottom="20%" left="10%" delay={2} />
+            <LiquidBlob color="blue" size={500} top="20%" right="10%" delay={0} />
+            <LiquidBlob color="purple" size={400} bottom="20%" left="10%" delay={2} />
             
             <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
                 <AnimatedSection>
